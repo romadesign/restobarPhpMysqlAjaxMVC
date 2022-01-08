@@ -11,7 +11,7 @@
             $ruta = "Models/".$model.".php";
             if(file_exists($ruta)){
                 require_once $ruta;
-                $this->moldel = new $model();
+                $this->model = new $model();
             }
         }
     }

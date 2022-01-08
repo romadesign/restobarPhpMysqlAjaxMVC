@@ -40,19 +40,19 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Iniciar Seccion</h1>
                                     </div>
-                                    <form class="user">
+                                    <form id="frmLogin" class="user">
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user"
-                                                id="exampleInputEmail" aria-describedby="emailHelp"
+                                                id="username" name="username" aria-describedby="emailHelp"
                                                 placeholder="Ingrese usuario">
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="Ingrese contraseña">
+                                                id="password" name="password" placeholder="Ingrese contraseña">
                                         </div>
-                                        <a href="index.html" class="btn btn-primary btn-user btn-block">
+                                        <button class="btn btn-primary btn-user btn-block" type="submit" onclick="frmLogin(event)" >
                                             Login
-                                        </a>
+                                        </button>
                                     </form>
                                 </div>
                             </div>
@@ -75,6 +75,13 @@
 
     <!-- Custom scripts for all pages-->
     <script src="<?php echo base_url; ?>Assets/js/sb-admin-2.min.js"></script>
+
+    <script>
+        const base_url="<?php echo base_url; ?>"
+    </script>
+
+    <!-- Mis scripts-->
+    <script src="<?php echo base_url; ?>Assets/js/funciones.js"></script>
 
 </body>
 

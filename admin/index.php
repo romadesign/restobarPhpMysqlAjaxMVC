@@ -1,8 +1,7 @@
 <?php
-    require_once "Config/Config.php";
-
+require_once "Config/Config.php";
     $ruta = !empty($_GET['url']) ? $_GET['url'] : "Home/index";
-    $array = explode("/", $ruta);
+    $array = explode("/", $ruta);// print_r($array);
     $controller = $array[0];
     $metodo = "index";
     $parametro = "";
@@ -27,9 +26,9 @@
         if (method_exists($controller, $metodo)) {
             $controller->$metodo($parametro);
         } else {
-            echo 'No existe el metodo';
+            echo "No existe el Método";
         }
     } else {
-        echo 'No existe el controlador';
+        echo "No existe el Controlador";
     }
 ?>
