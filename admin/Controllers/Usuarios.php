@@ -30,7 +30,6 @@ class Usuarios extends Controller{
             }
         }
         echo json_encode($msg, JSON_UNESCAPED_UNICODE);
-        print_r($data);
         die();
     }
 }

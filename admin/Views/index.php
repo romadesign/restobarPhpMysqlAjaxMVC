@@ -50,6 +50,8 @@
                                             <input type="password" class="form-control form-control-user"
                                                 id="password" name="password" placeholder="Ingrese contraseña">
                                         </div>
+                                        <div class="alert alert-danger d-none text-center" id="alerta" role="alert">
+                                        </div>
                                         <button class="btn btn-primary btn-user btn-block" type="submit" onclick="frmLogin(event)" >
                                             Login
                                         </button>
