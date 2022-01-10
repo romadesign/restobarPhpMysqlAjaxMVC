@@ -24,6 +24,21 @@ class Query extends Conexion{
         $data = $resul->fetchAll(PDO::FETCH_ASSOC);
         return $data;
     }
+
+    //Register user
+    public function save(string $sql, array $data)
+    {
+        $this->sql = $sql;
+        $this->data = $data;
+        $insert = $this->con->prepare($this->sql);
+        $givens = $insert->execute($this->data);
+        if($givens){
+            $res = 1;
+        }else{
+            $res = 0;
+        }
+        return $res;
+    }
 }
 
 ?>

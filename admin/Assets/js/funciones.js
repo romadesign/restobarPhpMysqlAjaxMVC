@@ -16,7 +16,7 @@ const deleteUser = async (id) => {
     `
 }
 
-const getUsers = async () => {    const xhttpUsers = new XMLHttpRequest();
+const getUsers = async () => { const xhttpUsers = new XMLHttpRequest();
     xhttpUsers.open('GET', base_url + 'Usuarios/Listar', true);
     xhttpUsers.send();
     xhttpUsers.onreadystatechange = function () {
@@ -53,6 +53,7 @@ const getUsers = async () => {    const xhttpUsers = new XMLHttpRequest();
 getUsers();
 
 
+
 function frmLogin(e) {
     e.preventDefault();
     const username = document.getElementById("username");
@@ -61,7 +62,7 @@ function frmLogin(e) {
         console.log("ingrese usuername")
         password.classList.remove("is-invalid");
         username.classList.add("is-invalid");
-        username.focus();
+        username.focus();   
     } else if (password.value == "") {
         username.classList.remove("is-invalid");
         password.classList.add("is-invalid");
@@ -95,3 +96,50 @@ function frmLogin(e) {
         }
     }
 }
+
+
+function userRegister(e) {
+    e.preventDefault();
+    const username = document.getElementById("username");
+    const firstName = document.getElementById("firstName");
+    const lastName = document.getElementById("lastName");
+    const email = document.getElementById("email");
+    const phone = document.getElementById("phone");
+    const userType = document.getElementById("userType");
+    const password = document.getElementById("password");
+    const cpassword = document.getElementById("cpassword");
+    if (username.value == "" || firstName.value == "" || lastName.value == ""  || email.value == "" || phone.value == "" || userType.value == "" || password.value == "") {
+        console.log("Necesita rellenar todos los campos")
+        password.classList.remove("is-invalid");
+        username.classList.add("is-invalid");
+        username.focus();
+    } else if (password.value != cpassword.value ) {
+        console.log("las contraseña no son iguales")
+
+    } else {
+        const xhrRegisterUser = new XMLHttpRequest(),
+            method = "POST",
+            url = base_url + 'Usuarios/registrar',
+            frm = document.getElementById("frmUsuario");
+      
+
+        //Metodo 2
+        xhrRegisterUser.open(method, url, true);
+        xhrRegisterUser.send(new FormData(frm));
+        xhrRegisterUser.onreadystatechange = function () {
+            if (xhrRegisterUser.readyState === XMLHttpRequest.DONE) {
+                var status = xhrRegisterUser.status;
+                if (status === 0 || (status >= 200 && status < 400)) {
+                    const res = JSON.parse(xhrRegisterUser.responseText);
+                    if (res == "si") {
+                        console.log(res + ' Usuario registrado con exito');
+                    } else {
+                        //Mostrando errores por pantalla
+                        console.log(res, 'malo');
+                    }
+                }
+            }
+        }
+    }
+}
+

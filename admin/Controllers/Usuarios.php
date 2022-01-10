@@ -9,9 +9,10 @@ class Usuarios extends Controller{
 
     public function index()
     {   
-        $this->views->getView($this, "index");
+        $this->views->getView($this, "index", $data);
     }
 
+    //Get Users
     public function Listar()
     {
        $data = $this->model->getUsuarios();
@@ -19,19 +20,34 @@ class Usuarios extends Controller{
        die();
     }
 
-    //delete
-    public function Eliminar(int $id)
-    {
-       $data = $this->model->deleteUsuario($id);
-       if($data == 1){
-           $msg = "ok";
-       }else{
-           $msg = "Error al eliminar el usuario";
-       }
-       echo json_encode($msg, JSON_UNESCAPED_UNICODE);
-       die();
-    }
 
+
+      //Registe
+      public function registrar() 
+      {
+        $username = $_POST["username"];
+        $firstName = $_POST["firstName"];
+        $lastName = $_POST["lastName"];
+        $email = $_POST["email"];
+        $phone = $_POST["phone"];
+        $userType = $_POST["userType"];
+        $password = $_POST["password"];
+        $cpassword = $_POST["cpassword"];
+        if(empty($username) || empty($firstName) || empty($lastName)|| empty($email)|| empty($phone)|| empty($userType)|| empty($password)){
+            $msg = "Todos los campos son obligatorios";
+        }else if($password != $cpassword){
+            $msg = "Las contraseñas no coinciden";
+        }else{
+            $data = $this->model->createUser($username,$firstName,$lastName,$email,$phone,$userType,$password);
+            if($data == "ok"){
+                $msg = "si";
+            }else{
+                $msg = "Error al registrar el usuario";
+            }
+        }
+        echo json_encode($msg, JSON_UNESCAPED_UNICODE);
+        die();
+      }
     
 
     public function validar()
@@ -55,5 +71,7 @@ class Usuarios extends Controller{
         echo json_encode($msg, JSON_UNESCAPED_UNICODE);
         die();
     }
+   
+
 }
 ?>
