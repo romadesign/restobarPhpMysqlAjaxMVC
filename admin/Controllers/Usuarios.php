@@ -11,6 +11,29 @@ class Usuarios extends Controller{
     {   
         $this->views->getView($this, "index");
     }
+
+    public function Listar()
+    {
+       $data = $this->model->getUsuarios();
+       echo json_encode($data, JSON_UNESCAPED_UNICODE);
+       die();
+    }
+
+    //delete
+    public function Eliminar(int $id)
+    {
+       $data = $this->model->deleteUsuario($id);
+       if($data == 1){
+           $msg = "ok";
+       }else{
+           $msg = "Error al eliminar el usuario";
+       }
+       echo json_encode($msg, JSON_UNESCAPED_UNICODE);
+       die();
+    }
+
+    
+
     public function validar()
     {   
         $username = $_POST["username"];

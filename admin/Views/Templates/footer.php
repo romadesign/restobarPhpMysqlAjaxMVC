@@ -46,7 +46,7 @@
 
 
 <!-- Bootstrap core JavaScript-->
-<script src="<?php echo base_url; ?>/Assets/vendor/jquery/jquery.min.js"></script>
+<script src="<?php echo base_url; ?>/Assets/vendor/jquery/jquery-3.6.0.min.js"></script>
 <script src="<?php echo base_url; ?>/Assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 <!-- Core plugin JavaScript-->
@@ -61,6 +61,11 @@
 <!-- Page level custom scripts -->
 <!-- <script src="<?php echo base_url; ?>/Assets/js/demo/chart-area-demo.js"></script> -->
 <!-- <script src="<?php echo base_url; ?>/Assets/js/demo/chart-pie-demo.js"></script> -->
+
+<script>
+const base_url = "<?php echo base_url ?>";
+</script>
+<script src="<?php echo base_url; ?>/Assets/js/funciones.js"></script>
 
 </body>
 
