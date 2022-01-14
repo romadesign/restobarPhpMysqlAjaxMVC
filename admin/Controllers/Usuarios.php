@@ -9,7 +9,7 @@ class Usuarios extends Controller{
 
     public function index()
     {   
-        $this->views->getView($this, "index", $data);
+        $this->views->getView($this, "index");
     }
 
     //Get Users
@@ -41,6 +41,8 @@ class Usuarios extends Controller{
             $data = $this->model->createUser($username,$firstName,$lastName,$email,$phone,$userType,$password);
             if($data == "ok"){
                 $msg = "si";
+            }else if($data == "existe"){
+                $msg = "El usuario ya existe";
             }else{
                 $msg = "Error al registrar el usuario";
             }

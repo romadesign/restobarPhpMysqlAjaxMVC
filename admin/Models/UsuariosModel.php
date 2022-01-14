@@ -43,21 +43,29 @@ class UsuariosModel extends Query{
         $this->phone = $phone;
         $this->userType = $userType;
         $this->password = $password;
-        $sql = "INSERT INTO users ( username, firstName, lastName, email, phone, userType, password) VALUES (?,?,?,?,?,?,?)"; 
-        $data = array(
-            $this->username,
-            $this->firstName,
-            $this->lastName,
-            $this->email,
-            $this->phone,
-            $this->userType,
-            $this->password,
-        );
-        $givens = $this->save($sql, $data);
-        if($givens == 1){
-            $res = "ok";
+        //Verification un user
+        $verificationUser = "SELECT * FROM users WHERE username = '$this->username' OR email = '$this->email'";
+        $exitsUser = $this->select( $verificationUser);
+        if(empty($exitsUser)){
+            #verification
+            $sql = "INSERT INTO users ( username, firstName, lastName, email, phone, userType, password) VALUES (?,?,?,?,?,?,?)"; 
+            $data = array(
+                $this->username,
+                $this->firstName,
+                $this->lastName,
+                $this->email,
+                $this->phone,
+                $this->userType,
+                $this->password,
+            );
+            $givens = $this->save($sql, $data);
+            if($givens == 1){
+                $res = "ok";
+            }else{
+                $res = "error";
+            }
         }else{
-            $res = "error";
+            $res = "existe";
         }
         return $res;
     }
@@ -74,4 +82,10 @@ class UsuariosModel extends Query{
     // }
 }
 
-?>
+d 
+d 
+b 
+d 
+6 d 
+7 a 
+8 c 

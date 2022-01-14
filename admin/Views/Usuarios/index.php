@@ -5,7 +5,6 @@
 </div>
 
 <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#exampleModal">Nuevo</button>
-<?php print_r($data) ?>
 <table class="table" id="tblUsuarios">
     <thead class="thead-dark">
         <tr>
