@@ -1,22 +1,5 @@
-
-const deleteUser = async (id) => {
-    let showDetailModel = document.getElementById("modalDelete");
-    showDetailModel.innerHTML = `
-        <div class="modal-header" >
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            Quieres eliminar este usuario? ${id}
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-primary">Delete</button>
-        </div>
-    `
-}
-
-const getUsers = async () => { const xhttpUsers = new XMLHttpRequest();
+const getUsers = async () => {
+    const xhttpUsers = new XMLHttpRequest();
     xhttpUsers.open('GET', base_url + 'Usuarios/Listar', true);
     xhttpUsers.send();
     xhttpUsers.onreadystatechange = function () {
@@ -35,11 +18,11 @@ const getUsers = async () => { const xhttpUsers = new XMLHttpRequest();
                         <td>${user.username}</td>
                         <td>${user.email}</td>
                         <td>${user.phone}</td>
-                        <td>${user.userType == "1" && admin || usuario }</td> 
+                        <td>${user.userType == "1" && admin || usuario}</td> 
                         <td>
                         <div class="d-flex">
-                            <button type="button" class="btn btn-primary mr-1">Edit</button>
-                            <button type="button" onClick="deleteUser(${user.id})" class="btn btn-danger" data-toggle="modal" data-target="#deleteUser">
+                            <button type="button" onclick="selectUserId(${user.id})"  data-toggle="modal" data-target="#editUser">Edit</button>
+                            <button type="button" class="btn btn-danger">
                             Delete
                             </button>
                         </div>
@@ -48,10 +31,10 @@ const getUsers = async () => { const xhttpUsers = new XMLHttpRequest();
                 `
             }
         }
+        
     }
 };
 getUsers();
-
 
 
 function frmLogin(e) {
@@ -62,7 +45,7 @@ function frmLogin(e) {
         console.log("ingrese usuername")
         password.classList.remove("is-invalid");
         username.classList.add("is-invalid");
-        username.focus();   
+        username.focus();
     } else if (password.value == "") {
         username.classList.remove("is-invalid");
         password.classList.add("is-invalid");
@@ -108,12 +91,12 @@ function userRegister(e) {
     const userType = document.getElementById("userType");
     const password = document.getElementById("password");
     const cpassword = document.getElementById("cpassword");
-    if (username.value == "" || firstName.value == "" || lastName.value == ""  || email.value == "" || phone.value == "" || userType.value == "" || password.value == "") {
+    if (username.value == "" || firstName.value == "" || lastName.value == "" || email.value == "" || phone.value == "" || userType.value == "" || password.value == "") {
         console.log("Necesita rellenar todos los campos")
         password.classList.remove("is-invalid");
         username.classList.add("is-invalid");
         username.focus();
-    } else if (password.value != cpassword.value ) {
+    } else if (password.value != cpassword.value) {
         console.log("las contraseña no son iguales")
 
     } else {
@@ -121,7 +104,7 @@ function userRegister(e) {
             method = "POST",
             url = base_url + 'Usuarios/registrar',
             frm = document.getElementById("frmUsuario");
-      
+
 
         //Metodo 2
         xhrRegisterUser.open(method, url, true);
@@ -143,3 +126,68 @@ function userRegister(e) {
     }
 }
 
+
+function modificarUsuario(e) {
+    e.preventDefault();
+    const username = document.getElementById("editUsername");
+    const firstName = document.getElementById("editFirstName");
+    const lastName = document.getElementById("editLastName");
+    const email = document.getElementById("editEmail");
+    const phone = document.getElementById("editPhone");
+    const userType = document.getElementById("editUserType");
+    // if (username.value == "" || firstName.value == "" || lastName.value == "" || email.value == "" || phone.value == "" || userType.value == "") {
+    //     console.log("Necesita rellenar todos los campos")
+    // } else {
+        const xhrModifyUser = new XMLHttpRequest(),
+            method = "POST",
+            url = base_url + 'Usuarios/modificar',
+            frm = document.getElementById("frmEditUsuario");
+
+
+        //Metodo 2
+        xhrModifyUser.open(method, url, true);
+        xhrModifyUser.send(new FormData(frm));
+        xhrModifyUser.onreadystatechange = function () {
+            if (xhrModifyUser.readyState === XMLHttpRequest.DONE) {
+                var status = xhrModifyUser.status;
+                if (status === 0 || (status >= 200 && status < 400)) {
+                    const res = JSON.parse(xhrModifyUser.responseText);
+                    if (res == "si") {
+                        console.log(res + ' Usuario editado con exito');
+                    } else {
+                        //Mostrando errores por pantalla
+                        console.log(res, 'malo');
+                    }
+                }
+            }
+        // }
+    }
+}
+
+function selectUserId(id) {
+    const xhrSelectUser = new XMLHttpRequest(),
+        method = "GET",
+        url = base_url + 'Usuarios/selectUserId/'+id,
+        frm = document.getElementById("frmEditUsuario");
+
+    //Metodo 2
+    xhrSelectUser.open(method, url, true);
+    xhrSelectUser.send(new FormData(frm));
+    xhrSelectUser.onreadystatechange = function () {
+        if (xhrSelectUser.readyState === XMLHttpRequest.DONE) {
+            var status = xhrSelectUser.status;
+            if (status === 0 || (status >= 200 && status < 400)) {
+                const res = JSON.parse(xhrSelectUser.responseText);
+                console.log(res.username)
+                document.getElementById("id").value = res.id;
+                document.getElementById("editUsername").value = res.username;
+                document.getElementById("editFirstName").value = res.firstName;
+                document.getElementById("editLastName").value = res.lastName;
+                document.getElementById("editEmail").value = res.email;
+                document.getElementById("editPhone").value = res.phone;
+                document.getElementById("editUserType").value = res.userType;
+                
+            }
+        }
+    }
+}

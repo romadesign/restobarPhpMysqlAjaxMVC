@@ -87,17 +87,66 @@
             </div>
         </div>
     </div>
+</div>
 
-
-
-
-    <!-- Modal DELETE-->
-    <div class="modal fade" id="deleteUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content" id="modalDelete">
-
+<!-- Modal  Edit User -->
+<div class="modal fade" id="editUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Editar usuario</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form  method="POST" id="frmEditUsuario">
+                        <div class="form-group">
+                            <input type="hidden" id="id" name="id">
+                            <input class="form-control" id="editUsername" name="editUsername"
+                                placeholder="Elija un nombre de usuario único" type="text" required minlength="3"
+                                maxlength="11">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="editFirstName" name="editFirstName"
+                                placeholder="Ingrese su nombre" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="editLastName" name="editLastName"
+                                placeholder="Ingrese su apellido" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="editEmail" name="editEmail"
+                                placeholder="Ingrese un correo" required>
+                        </div>
+                        <div class="form-group row my-0">
+                            <div class="form-group col-md-6 my-0">
+                                <b><label for="phone">Celular:</label></b>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon">+64</span>
+                                    </div>
+                                    <input type="tel" class="form-control" id="editPhone" name="editPhone"
+                                        placeholder="Ingrese el número de teléfono" required maxlength="9">
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6 my-0">
+                                <b><label for="userType">Type:</label></b>
+                                <select name="editUserType" id="editUserType" class="custom-select browser-default" required>
+                                    <option value="0">User</option>
+                                    <option value="1">Admin</option>
+                                </select>
+                            </div>
+                        </div>
+                    <button type="submit" class="btn btn-sm btn-primary" onclick="modificarUsuario(event);"> Editar
+                    </button>
+                </form>
             </div>
         </div>
     </div>
+</div>
+
+
+
 
     <?php include "Views/Templates/footer.php" ?>
