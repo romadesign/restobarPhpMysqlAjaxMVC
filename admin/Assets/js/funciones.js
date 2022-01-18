@@ -1,4 +1,5 @@
-const getUsers = async () => {
+
+function getUsers(){
     const xhttpUsers = new XMLHttpRequest();
     xhttpUsers.open('GET', base_url + 'Usuarios/Listar', true);
     xhttpUsers.send();
@@ -22,20 +23,17 @@ const getUsers = async () => {
                         <td>
                         <div class="d-flex">
                             <button type="button" onclick="selectUserId(${user.id})"  data-toggle="modal" data-target="#editUser">Edit</button>
-                            <button type="button" class="btn btn-danger">
-                            Delete
-                            </button>
+                            <button type="button" onclick="deleteUserId(${user.id})"  data-toggle="modal" data-target="#deletetUser">Delete </button>
                         </div>
                         </td>
                     </tr>
                 `
             }
         }
-        
-    }
-};
-getUsers();
 
+    }
+}
+getUsers();
 
 function frmLogin(e) {
     e.preventDefault();
@@ -138,28 +136,28 @@ function modificarUsuario(e) {
     // if (username.value == "" || firstName.value == "" || lastName.value == "" || email.value == "" || phone.value == "" || userType.value == "") {
     //     console.log("Necesita rellenar todos los campos")
     // } else {
-        const xhrModifyUser = new XMLHttpRequest(),
-            method = "POST",
-            url = base_url + 'Usuarios/modificar',
-            frm = document.getElementById("frmEditUsuario");
+    const xhrModifyUser = new XMLHttpRequest(),
+        method = "POST",
+        url = base_url + 'Usuarios/modificar',
+        frm = document.getElementById("frmEditUsuario");
 
 
-        //Metodo 2
-        xhrModifyUser.open(method, url, true);
-        xhrModifyUser.send(new FormData(frm));
-        xhrModifyUser.onreadystatechange = function () {
-            if (xhrModifyUser.readyState === XMLHttpRequest.DONE) {
-                var status = xhrModifyUser.status;
-                if (status === 0 || (status >= 200 && status < 400)) {
-                    const res = JSON.parse(xhrModifyUser.responseText);
-                    if (res == "si") {
-                        console.log(res + ' Usuario editado con exito');
-                    } else {
-                        //Mostrando errores por pantalla
-                        console.log(res, 'malo');
-                    }
+    //Metodo 2
+    xhrModifyUser.open(method, url, true);
+    xhrModifyUser.send(new FormData(frm));
+    xhrModifyUser.onreadystatechange = function () {
+        if (xhrModifyUser.readyState === XMLHttpRequest.DONE) {
+            var status = xhrModifyUser.status;
+            if (status === 0 || (status >= 200 && status < 400)) {
+                const res = JSON.parse(xhrModifyUser.responseText);
+                if (res == "si") {
+                    console.log(res + ' Usuario editado con exito');
+                } else {
+                    //Mostrando errores por pantalla
+                    console.log(res, 'malo');
                 }
             }
+        }
         // }
     }
 }
@@ -167,7 +165,7 @@ function modificarUsuario(e) {
 function selectUserId(id) {
     const xhrSelectUser = new XMLHttpRequest(),
         method = "GET",
-        url = base_url + 'Usuarios/selectUserId/'+id,
+        url = base_url + 'Usuarios/selectUserId/' + id,
         frm = document.getElementById("frmEditUsuario");
 
     //Metodo 2
@@ -186,8 +184,36 @@ function selectUserId(id) {
                 document.getElementById("editEmail").value = res.email;
                 document.getElementById("editPhone").value = res.phone;
                 document.getElementById("editUserType").value = res.userType;
-                
+
             }
         }
     }
 }
+
+function deleteUserId(id) {
+    console.log("delete " + id)
+    const xhrDeleteUser = new XMLHttpRequest(),
+        method = "POST",
+        url = base_url + 'Usuarios/eliminarUserId/' + id;
+
+    //Metodo 2
+    xhrDeleteUser.open(method, url, true);
+    xhrDeleteUser.send();
+    xhrDeleteUser.onreadystatechange = function () {
+        if (xhrDeleteUser.readyState === XMLHttpRequest.DONE) {
+            var status = xhrDeleteUser.status;
+            if (status === 0 || (status >= 200 && status < 400)) {
+                const res = JSON.parse(xhrDeleteUser.responseText);
+                if (res == "ok") {
+                    console.log(res + ' Usuario eliminado con exito');
+                } else {
+                    //Mostrando errores por pantalla
+                    console.log(res, 'malo');
+                }
+            }
+        }
+    }
+}
+
+
+

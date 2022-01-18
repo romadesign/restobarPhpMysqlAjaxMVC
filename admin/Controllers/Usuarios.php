@@ -75,7 +75,6 @@ class Usuarios extends Controller{
        die();
      }
     
-
     public function validar()
     {   
         $username = $_POST["username"];
@@ -108,7 +107,19 @@ class Usuarios extends Controller{
         die();
     
     }
-   
+
+    //Delete User
+    public function eliminarUserId($id)
+    {
+       $data = $this->model->deleteUsuarioId($id);
+       if($data == 1){
+           $msg = "ok";
+       }else{
+           $msg = "Error al elimiar usuario";
+       }
+       echo json_encode($msg, JSON_UNESCAPED_UNICODE);
+       die();
+    }
 
 }
 ?>

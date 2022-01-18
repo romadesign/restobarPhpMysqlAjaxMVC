@@ -1,6 +1,6 @@
 <?php
 class UsuariosModel extends Query{
-    // private $id;
+    private $id;
     private $username;
     private $firstName;
     private $lastName;
@@ -49,7 +49,8 @@ class UsuariosModel extends Query{
         $verificationUser = "SELECT * FROM users WHERE username = '$this->username' OR email = '$this->email'";
         $exitsUser = $this->select( $verificationUser);
         if(empty($exitsUser)){
-            #verification
+            //hash password
+            $this->hash = password_hash($password, PASSWORD_DEFAULT);
             $sql = "INSERT INTO users ( username, firstName, lastName, email, phone, userType, password) VALUES (?,?,?,?,?,?,?)"; 
             $data = array(
                 $this->username,
@@ -58,7 +59,7 @@ class UsuariosModel extends Query{
                 $this->email,
                 $this->phone,
                 $this->userType,
-                $this->password,
+                $this->hash,
             );
             $givens = $this->save($sql, $data);
             if($givens == 1){
@@ -115,5 +116,14 @@ class UsuariosModel extends Query{
         $sql = "SELECT * FROM  users WHERE id = $id ";
         $data = $this->select($sql);
         return $data;
+    }
+
+    public function deleteUsuarioId(int $id)
+    {
+        $this->id = $id;
+        $sql = "DELETE FROM  users WHERE id = ?";
+        $data = array( $this->id);
+        $givens = $this->save($sql, $data);
+        return $givens;
     }
 }
