@@ -50,7 +50,7 @@ class UsuariosModel extends Query{
         $exitsUser = $this->select( $verificationUser);
         if(empty($exitsUser)){
             //hash password
-            $this->hash = password_hash($password, PASSWORD_DEFAULT);
+            //$this->hash = password_hash($password, PASSWORD_DEFAULT);
             $sql = "INSERT INTO users ( username, firstName, lastName, email, phone, userType, password) VALUES (?,?,?,?,?,?,?)"; 
             $data = array(
                 $this->username,
@@ -59,7 +59,7 @@ class UsuariosModel extends Query{
                 $this->email,
                 $this->phone,
                 $this->userType,
-                $this->hash,
+                $this->password,
             );
             $givens = $this->save($sql, $data);
             if($givens == 1){

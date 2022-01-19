@@ -3,6 +3,9 @@ class Usuarios extends Controller{
     public function __construct()
     {
         session_start();
+        if(empty($_SESSION["userType"]) == "1" || empty($_SESSION["username"]) == "admin" ){
+            header("location :" .base_url. "Usuarios");
+        }
         parent::__construct();
         
     }
@@ -20,9 +23,7 @@ class Usuarios extends Controller{
        die();
     }
 
-
-
-      //Registe
+      //Register
       public function registrar() 
       {
         $username = $_POST["username"];
@@ -33,12 +34,14 @@ class Usuarios extends Controller{
         $userType = $_POST["userType"];
         $password = $_POST["password"];
         $cpassword = $_POST["cpassword"];
+        //Hash password 
+        $hash = hash("sha256", $password);
         if(empty($username) || empty($firstName) || empty($lastName)|| empty($email)|| empty($phone)|| empty($userType)|| empty($password)){
             $msg = "Todos los campos son obligatorios";
         }else if($password != $cpassword){
             $msg = "Las contraseñas no coinciden";
         }else{
-            $data = $this->model->createUser($username,$firstName,$lastName,$email,$phone,$userType,$password);
+            $data = $this->model->createUser($username,$firstName,$lastName,$email,$phone,$userType,$hash);
             if($data == "ok"){
                 $msg = "si";
             }else if($data == "existe"){
@@ -75,27 +78,6 @@ class Usuarios extends Controller{
        die();
      }
     
-    public function validar()
-    {   
-        $username = $_POST["username"];
-        $password = $_POST["password"]; 
-        if(empty( $username) || empty($password)){
-            $msg = "Los campos estan vacios";
-        }else{
-            
-            $data =  $this->model->getUsuario( $username,  $password );
-            if($data){
-                $_SESSION['id'] = $data['id'];
-                $_SESSION['username'] = $data['username'];
-                $_SESSION['password'] = $data['password'];
-                $msg = "ok";
-            }else{
-                $msg = "Usuario o contraseña incorrecta";
-            }
-        }
-        echo json_encode($msg, JSON_UNESCAPED_UNICODE);
-        die();
-    }
 
     //Edit User
     public function selectUserId(int $id)
@@ -121,5 +103,36 @@ class Usuarios extends Controller{
        die();
     }
 
+
+    public function validar()
+    {   
+       
+        if(empty( $_POST["username"]) || empty($_POST["password"])){
+            $msg = "Los campos estan vacios";
+        }else{
+            $username = $_POST["username"];
+            $password = $_POST["password"]; 
+            //validation hash password
+            $hash = hash("sha256", $password);
+            $data =  $this->model->getUsuario( $username,  $hash );
+            if($data){
+                $_SESSION['id'] = $data['id'];
+                $_SESSION['username'] = $data['username'];
+                $_SESSION['password'] = $data['password'];
+                $_SESSION['userType'] = $data['userType'];
+                $msg = "ok";
+            }else{
+                $msg = "Usuario o contraseña incorrecta";
+            }
+        }
+        echo json_encode($msg, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
+    public function salir()
+    {
+        session_destroy();
+        header("location: " .base_url);
+    }
+
 }
-?>

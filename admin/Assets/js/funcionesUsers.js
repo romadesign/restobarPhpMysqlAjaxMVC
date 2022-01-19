@@ -35,50 +35,6 @@ function getUsers(){
 }
 getUsers();
 
-function frmLogin(e) {
-    e.preventDefault();
-    const username = document.getElementById("username");
-    const password = document.getElementById("password");
-    if (username.value == "") {
-        console.log("ingrese usuername")
-        password.classList.remove("is-invalid");
-        username.classList.add("is-invalid");
-        username.focus();
-    } else if (password.value == "") {
-        username.classList.remove("is-invalid");
-        password.classList.add("is-invalid");
-        password.focus();
-    } else {
-        const xhrLogin = new XMLHttpRequest(),
-            method = "POST",
-            url = base_url + 'Usuarios/validar',
-            frm = document.getElementById("frmLogin");
-
-        //Metodo 1
-        xhrLogin.open(method, url, true);
-        xhrLogin.send(new FormData(frm));
-        xhrLogin.onreadystatechange = function () {
-            if (xhrLogin.readyState === XMLHttpRequest.DONE) {
-                var status = xhrLogin.status;
-                if (status === 0 || (status >= 200 && status < 400)) {
-                    const res = JSON.parse(xhrLogin.responseText);
-                    console.log(xhrLogin.responseText);
-                    if (res == "ok") {
-                        console.log(res, 'jello')
-                        window.location = base_url + "Usuarios";
-                    } else {
-                        //Mostrando errores por pantalla
-                        document.getElementById("alerta").classList.remove("d-none")
-                        document.getElementById("alerta").innerHTML = res;
-
-                    }
-                }
-            }
-        }
-    }
-}
-
-
 function userRegister(e) {
     e.preventDefault();
     const username = document.getElementById("username");
@@ -103,8 +59,6 @@ function userRegister(e) {
             url = base_url + 'Usuarios/registrar',
             frm = document.getElementById("frmUsuario");
 
-
-        //Metodo 2
         xhrRegisterUser.open(method, url, true);
         xhrRegisterUser.send(new FormData(frm));
         xhrRegisterUser.onreadystatechange = function () {
@@ -124,7 +78,6 @@ function userRegister(e) {
     }
 }
 
-
 function modificarUsuario(e) {
     e.preventDefault();
     const username = document.getElementById("editUsername");
@@ -141,8 +94,6 @@ function modificarUsuario(e) {
         url = base_url + 'Usuarios/modificar',
         frm = document.getElementById("frmEditUsuario");
 
-
-    //Metodo 2
     xhrModifyUser.open(method, url, true);
     xhrModifyUser.send(new FormData(frm));
     xhrModifyUser.onreadystatechange = function () {
@@ -168,7 +119,6 @@ function selectUserId(id) {
         url = base_url + 'Usuarios/selectUserId/' + id,
         frm = document.getElementById("frmEditUsuario");
 
-    //Metodo 2
     xhrSelectUser.open(method, url, true);
     xhrSelectUser.send(new FormData(frm));
     xhrSelectUser.onreadystatechange = function () {
@@ -196,7 +146,6 @@ function deleteUserId(id) {
         method = "POST",
         url = base_url + 'Usuarios/eliminarUserId/' + id;
 
-    //Metodo 2
     xhrDeleteUser.open(method, url, true);
     xhrDeleteUser.send();
     xhrDeleteUser.onreadystatechange = function () {
