@@ -146,3 +146,4 @@ function deleteCategorieId(categorieId){
 
 
 
+

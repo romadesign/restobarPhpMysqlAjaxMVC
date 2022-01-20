@@ -51,7 +51,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="<?php echo base_url; ?>Usuarios">Usuarios</a>
                         <a class="collapse-item" href="<?php echo base_url; ?>Categorias">Categorias</a>
-                        <a class="collapse-item" href="cards.html">Menús</a>
+                        <a class="collapse-item" href="<?php echo base_url; ?>Menus">Menus</a>
                     </div>
                 </div>
             </li>

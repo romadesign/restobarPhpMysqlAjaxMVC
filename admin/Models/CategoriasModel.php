@@ -6,7 +6,6 @@ class CategoriasModel extends Query{
     private $categorieDesc;
     private $categorieImage;
 
-
     public function __construct()
     {
         parent::__construct();
