@@ -9,7 +9,7 @@
     <thead class="thead-dark">
         <tr>
             <th scope="col">id</th>
-            <th scope="col">Titulo</th>
+            <th scope="col">Categoria</th>
             <th scope="col">Detalle</th>
             <th scope="col">Img</th>
             <th scope="col">Opciones</th>
@@ -51,5 +51,38 @@
         </div>
     </div>
 </div>
+
+<!-- Modal  Edit category -->
+<div class="modal fade" id="editCategorie" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Editar categoria</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            <form method="POST" id="frmEditCategoria">
+                    <div class="form-group">
+                        <input type="hidden" id="categorieId" name="categorieId">
+                        <input class="form-control" id="editCategorieName" name="editCategorieName" placeholder="Elija un nuevo titulo para la categoria" type="text" required minlength="3" maxlength="20">
+                    </div>
+                    <div class="form-group">
+                        <textarea cols="30" rows="3" class="form-control" id="editCategorieDesc" name="editCategorieDesc" placeholder="Description:" required></textarea>
+                    </div>
+                    <!-- <div class="form-group">
+                        <label for="image" class="control-label">Image</label>
+                        <input type="file" name="categorieImage" id="categorieImage" accept=".jpg" class="form-control" required style="border:none;">
+                        <small id="Info" class="form-text text-muted mx-3">Please .jpg file upload.</small>
+                    </div> -->
+                    <button type="submit" class="btn btn-sm btn-primary" onclick="editCategoria(event);"> Editar
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <?php include "Views/Templates/footer.php" ?>

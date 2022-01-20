@@ -1,15 +1,7 @@
 <?php 
 class CategoriasModel extends Query{
-    //private $id;
-    private $username;
-    private $firstName;
-    private $lastName;
-    private $email;
-    private $phone;
-    private $userType;
-    private $password;
-
     //categories
+    private $categorieId;
     private $categorieName;
     private $categorieDesc;
     private $categorieImage;
@@ -66,32 +58,20 @@ class CategoriasModel extends Query{
     }
 
     //Modification user 
-    public function modifyUser(
-        string $username, 
-        string $firstName, 
-        string $lastName, 
-        string $email, 
-        string $phone, 
-        string $userType,
-        int $id )
+    public function modifyCategoria(
+        string $categorieName, 
+        string $categorieDesc,
+        int $categorieId )
     {
-        $this->username = $username;
-        $this->firstName = $firstName;
-        $this->lastName = $lastName;
-        $this->email = $email;
-        $this->phone = $phone;
-        $this->userType = $userType;
-        $this->id = $id;
+        $this->categorieName = $categorieName;
+        $this->categorieDesc = $categorieDesc;
+        $this->categorieId = $categorieId;
          #update
-         $sql = "UPDATE users SET  username=?, firstName=?, lastName=?, email=?, phone=?, userType=? WHERE id =?";
+         $sql = "UPDATE `categories` SET  categorieName=?, categorieDesc=? WHERE categorieId =?";
          $data = array(
-             $this->username,
-             $this->firstName,
-             $this->lastName,
-             $this->email,
-             $this->phone,
-             $this->userType,
-             $this->id,
+             $this->categorieName,
+             $this->categorieDesc,
+             $this->categorieId,
          );
          $givens = $this->save($sql, $data);
          if($givens == 1){
@@ -102,19 +82,19 @@ class CategoriasModel extends Query{
         return $res;
     }
 
-    //Edit
-    public function selectUsuarioId(int $id)
+    //Select Categorie
+    public function selectCategoriaId(int $categorieId)
     {
-        $sql = "SELECT * FROM  users WHERE id = $id ";
+        $sql = "SELECT * FROM `categories` WHERE categorieId  = $categorieId ";
         $data = $this->select($sql);
         return $data;
     }
 
-    public function deleteUsuarioId(int $id)
+    public function deleteCategoriaId(int $categorieId)
     {
-        $this->id = $id;
-        $sql = "DELETE FROM  users WHERE id = ?";
-        $data = array( $this->id);
+        $this->categorieId = $categorieId;
+        $sql = "DELETE FROM  `categories` WHERE categorieId = ?";
+        $data = array( $this->categorieId);
         $givens = $this->save($sql, $data);
         return $givens;
     }

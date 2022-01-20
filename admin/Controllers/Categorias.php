@@ -52,53 +52,51 @@ class Categorias extends Controller{
     }
 
      //Modification
-    //  public function modificar() 
-    //  {
-    //    $username = $_POST["editUsername"];
-    //    $firstName = $_POST["editFirstName"];
-    //    $lastName = $_POST["editLastName"];
-    //    $email = $_POST["editEmail"];
-    //    $phone = $_POST["editPhone"];
-    //    $userType = $_POST["editUserType"];
-    //    $id = $_POST["id"];
-    //    if(empty($username) || empty($firstName) || empty($lastName)|| empty($email)|| empty($phone)|| empty($userType)){
-    //        $msg = "Todos los campos son obligatorios";
-    //    }else{
-    //        $data = $this->model->modifyUser($username,$firstName,$lastName,$email,$phone,$userType,$id);
-    //        if($data == "modificado"){
-    //            $msg = "si";
-    //        }else{
-    //            $msg = "Error al editar el usuario";
-    //        }
-    //    }
-    //    echo json_encode($msg, JSON_UNESCAPED_UNICODE);
-    //    die();
-    //  }
+    public function modificarCategoria() 
+    {
+      $categorieName = $_POST["editCategorieName"];
+      $categorieDesc = $_POST["editCategorieDesc"];
+      $categorieId = $_POST["categorieId"];
+      if(empty($categorieName) || empty($categorieDesc)){
+          $msg = "Todos los campos son obligatorios";
+      }else{
+          $data = $this->model->modifyCategoria($categorieName,$categorieDesc,$categorieId);
+          if($data == "modificado"){
+              $msg = "si";
+          }else{
+              $msg = "Error al editar la cateogira";
+          }
+      }
+      echo json_encode($msg, JSON_UNESCAPED_UNICODE);
+      die();
+    }
     
 
-    //Edit User
-    // public function selectUserId(int $id)
-    // {   
-    //     //Verificamos si nos da e Id seleccionado en el botton
-    //     //print_r($id)
-    //     $data = $this->model->selectUsuarioId($id);
-    //     echo json_encode($data, JSON_UNESCAPED_UNICODE);
-    //     die();
+    //Select Categorie
+    public function selectCategoriaId(int $categorieId)
+    {   
+        //Verificamos si nos da e Id seleccionado en el botton
+        //print_r($categorieId);
+        $data = $this->model->selectCategoriaId($categorieId);
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        die();
     
-    // }
+    }
 
     //Delete User
-    // public function eliminarUserId($id)
-    // {
-    //    $data = $this->model->deleteUsuarioId($id);
-    //    if($data == 1){
-    //        $msg = "ok";
-    //    }else{
-    //        $msg = "Error al elimiar usuario";
-    //    }
-    //    echo json_encode($msg, JSON_UNESCAPED_UNICODE);
-    //    die();
-    // }
+    public function eliminarCategoriaId($categorieId)
+    {   
+        //Mira si muesta el item seleccionado
+        //print_r($categorieId);
+        $data = $this->model->deleteCategoriaId($categorieId);
+        if($data == 1){
+            $msg = "ok";
+        }else{
+            $msg = "Error al elimiar la categoria";
+        }
+        echo json_encode($msg, JSON_UNESCAPED_UNICODE);
+        die();
+    }
 
 
 }
