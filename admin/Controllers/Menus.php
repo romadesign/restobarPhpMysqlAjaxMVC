@@ -1,5 +1,6 @@
 <?php
-class Menus extends Controller{
+class Menus extends Controller
+{
     public function __construct()
     {
         session_start();
@@ -7,20 +8,48 @@ class Menus extends Controller{
         //     header("location :" .base_url. "Usuarios");
         // }
         parent::__construct();
-        
     }
 
     public function index()
-    {   
-        $this->views->getView($this, "index");
+    {
+        $categories = $this->model->getCategories();
+        $this->views->getView($this, "index", $categories);
     }
 
     //Get Categorias
-    public function Mostrar()
+    public function Listar()
     {
-       $data = $this->model->getMenus();
-       echo json_encode($data, JSON_UNESCAPED_UNICODE);
-       die();
+        $data = $this->model->getMenus();
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        die();
     }
 
+    //Create Menus
+    public function createMenus()
+    {
+        //print_r($_POST);
+        $menuName = $_POST["menuName"];
+        $menuDesc = $_POST["menuDesc"];
+        $menuPrice = $_POST["menuPrice"];
+        $menuCategorieId = $_POST["menuCategorieId"];
+        $menuImage = $_FILES['menuImage']['tmp_name'];
+        //Config base64 img
+        $menuImageType = pathinfo($menuImage, PATHINFO_EXTENSION);
+        $datainage = file_get_contents($menuImage);
+        $img_base64 = base64_encode($datainage);
+        $img = 'data:image/' . $menuImageType . ';base64,' . $img_base64;
+
+        
+            $data = $this->model->createMenu($menuName,$menuDesc,$menuPrice,$menuCategorieId,$img);
+            if($data == "ok"){
+                $msg = "si";
+            }else if($data == "existe"){
+                $msg = "La categoria ya existe";
+            }else{
+                $msg = "Error al crear una nueva categoria";
+            }
+        
+        echo json_encode($msg, JSON_UNESCAPED_UNICODE);
+        die();
+    }
 }
