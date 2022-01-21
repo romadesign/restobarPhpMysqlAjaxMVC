@@ -19,7 +19,7 @@ function getMenuss(){
                         <td><img class="image_menu card-img-top" style="width: 5rem;" src="${menu.menuImage}"></td>
                         <td>
                         <div class="d-flex">
-                            <button type="button" onclick="selectCategoriaId(${menu.categorieId})"  data-toggle="modal" data-target="#editCategorie">Edit</button>
+                            <button type="button" onclick="selectMenuId(${menu.menuId})"  data-toggle="modal" data-target="#editMenu">Edit</button>
                             <button type="button" onclick="deleteCategorieId(${menu.categorieId})"  data-toggle="modal" data-target="#deletetCategorie">Delete</button>
                         </div>
                         </td>
@@ -31,7 +31,6 @@ function getMenuss(){
     }
 }
 getMenuss();
-
 
 
 function createMenu(e) {
@@ -62,6 +61,64 @@ function createMenu(e) {
                         console.log(res, 'malo');
                     }
                 }
+            }
+        }
+    }
+}
+
+function editMenu(e) {
+    e.preventDefault();
+    const categorieName = document.getElementById("editMenuName");
+    const categorieDesc = document.getElementById("editMenuDesc");
+    const categorieDesc = document.getElementById("editMenuPrice");
+    const categorieDesc = document.getElementById("editMenuCategorieId");
+    if (categorieName.value == "" || categorieDesc.value == "" ) {
+        console.log("Necesita rellenar todos los campos")
+    } else {
+        const xhrModifyMenu = new XMLHttpRequest(),
+        method = "POST",
+        url = base_url + 'Menus/modificarMenu',
+        frm = document.getElementById("frmEditMenus");
+
+        xhrModifyMenu.open(method, url, true);
+        xhrModifyMenu.send(new FormData(frm));
+        xhrModifyMenu.onreadystatechange = function () {
+            if (xhrModifyMenu.readyState === XMLHttpRequest.DONE) {
+                var status = xhrModifyMenu.status;
+                if (status === 0 || (status >= 200 && status < 400)) {
+                    const res = JSON.parse(xhrModifyMenu.responseText);
+                    if (res == "si") {
+                        console.log(res + ' Categoria modificada con exito');
+                    } else {
+                        //Mostrando errores por pantalla
+                        console.log(res, 'malo');
+                    }
+                }
+            }
+        }
+    }
+}
+
+function selectMenuId(menuId) {
+    const xhrSelectMenu = new XMLHttpRequest(),
+        method = "GET",
+        url = base_url + 'Menus/selectMenuId/' + menuId,
+        frm = document.getElementById("frmEditMenus");
+
+    xhrSelectMenu.open(method, url, true);
+    xhrSelectMenu.send(new FormData(frm));
+    xhrSelectMenu.onreadystatechange = function () {
+        if (xhrSelectMenu.readyState === XMLHttpRequest.DONE) {
+            var status = xhrSelectMenu.status;
+            if (status === 0 || (status >= 200 && status < 400)) {
+                console.log(xhrSelectMenu.responseText)
+                const res = JSON.parse(xhrSelectMenu.responseText);
+                document.getElementById("menuId").value = res.menuId;
+                document.getElementById("editMenuName").value = res.menuName;
+                document.getElementById("editMenuDesc").value = res.menuDesc;
+                document.getElementById("editMenuPrice").value = res.menuPrice;
+                document.getElementById("editMenuCategorieId").value = res.menuCategorieId;
+
             }
         }
     }

@@ -45,8 +45,8 @@
                         <small id="Info" class="form-text text-muted mx-3">Please .jpg file upload.</small>
                     </div>
                     <div class="form-group">
-							<input type="number" class="form-control" name="menuPrice" Placeholder="Price:" required min="1">
-						</div>
+						<input type="number" class="form-control" name="menuPrice" Placeholder="Price:" required min="1">
+					</div>
                     <div class="form-group">
                         <label for="menuCategorieId">Categorias</label>
                         <select class="form-control" name="menuCategorieId" id="menuCategorieId">
@@ -58,6 +58,51 @@
                     </div>
                    
                     <button type="submit" class="btn btn-sm btn-primary" onclick="createMenu(event);"> Create
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal  Edit category -->
+<div class="modal fade" id="editMenu" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Editar menú</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" id="frmEditMenus">
+                    <div class="form-group">
+                        <input type="hidden" id="menuId" name="menuId"> 
+                        <input class="form-control" id="editMenuName" name="editMenuName" placeholder="Agrega un menu" type="text" required minlength="3" maxlength="30">
+                    </div>
+                    <div class="form-group">
+                        <textarea cols="30" rows="3" class="form-control" id="editMenuDesc" name="editMenuDesc" placeholder="Description:" required></textarea>
+                    </div>
+                    <!-- <div class="form-group">
+                        <label for="menuImage" class="control-label">Image</label>
+                        <input type="file" name="menuImage" id="menuImage" accept=".jpg" class="form-control" required style="border:none;">
+                        <small id="Info" class="form-text text-muted mx-3">Please .jpg file upload.</small>
+                    </div> -->
+                    <div class="form-group">
+						<input type="number" class="form-control" id="editMenuPrice" name="editMenuPrice" Placeholder="Price:" required min="1">
+					</div>
+                    <div class="form-group">
+                        <label for="editMenuCategorieId">Categorias</label>
+                        <select class="form-control" name="editMenuCategorieId" id="editMenuCategorieId">
+                            <?php 
+                                foreach($categories as $categorie ){ ?>
+                                    <option value="<?php echo $categorie["categorieId"] ?>"><?php echo $categorie["categorieName"] ?></option>
+                            <?php }?>
+                        </select>
+                    </div>
+                   
+                    <button type="submit" class="btn btn-sm btn-primary" onclick="editMenu(event);"> Create
                     </button>
                 </form>
             </div>

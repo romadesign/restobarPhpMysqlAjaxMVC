@@ -71,4 +71,37 @@ class MenusModel extends Query{
         return $res;
     }
 
+    //Modification Menú
+    public function modifyMenu(
+        string $categorieName, 
+        string $categorieDesc,
+        int $categorieId )
+    {
+        $this->categorieName = $categorieName;
+        $this->categorieDesc = $categorieDesc;
+        $this->categorieId = $categorieId;
+         #update
+         $sql = "UPDATE `categories` SET  categorieName=?, categorieDesc=? WHERE categorieId =?";
+         $data = array(
+             $this->categorieName,
+             $this->categorieDesc,
+             $this->categorieId,
+         );
+         $givens = $this->save($sql, $data);
+         if($givens == 1){
+             $res = "modificado";
+         }else{
+             $res = "error";
+         }
+        return $res;
+    }
+
+    //Select Menú
+    public function selectCategoriaId(int $menuId)
+    {
+        $sql = "SELECT * FROM `menu` WHERE menuId  = $menuId ";
+        $data = $this->select($sql);
+        return $data;
+    }
+
 }

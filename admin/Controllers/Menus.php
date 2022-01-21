@@ -52,4 +52,15 @@ class Menus extends Controller
         echo json_encode($msg, JSON_UNESCAPED_UNICODE);
         die();
     }
+
+    //Select MenuId
+    public function selectMenuId(int $menuId)
+    {   
+        //Verificamos si nos da e Id seleccionado en el botton
+        //print_r($menuId);
+        $data = $this->model->selectCategoriaId($menuId);
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        die();
+    
+    }
 }
