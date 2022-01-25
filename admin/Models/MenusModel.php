@@ -97,6 +97,16 @@ class MenusModel extends Query{
         return $res;
     }
 
+    //Delete Menu
+    public function deleteMenuId(int $menuId)
+    {
+        $this->menuId = $menuId;
+        $sql = "DELETE FROM menu WHERE menuId = ?";
+        $data = array($this->menuId);
+        $givens = $this->save($sql, $data);
+        return $givens;
+    }
+
     //Select Menú
     public function selectCategoriaId(int $menuId)
     {

@@ -20,7 +20,7 @@ function getMenuss(){
                         <td>
                         <div class="d-flex">
                             <button type="button" onclick="selectMenuId(${menu.menuId})"  data-toggle="modal" data-target="#editMenu">Edit</button>
-                            <button type="button" onclick="deleteCategorieId(${menu.categorieId})"  data-toggle="modal" data-target="#deletetCategorie">Delete</button>
+                            <button type="button" onclick="deleteMenuId(${menu.menuId})"  data-toggle="modal" data-target="#deletetCategorie">Delete</button>
                         </div>
                         </td>
                     </tr>
@@ -97,6 +97,30 @@ function editMenu(e) {
             }
         }
     // }
+}
+
+function deleteMenuId(menuId) {
+    console.log("delete " + menuId)
+    const xhrDeleteMenu = new XMLHttpRequest(),
+        method = "POST",
+        url = base_url + 'Menus/eliminarMenuId/' + menuId;
+
+    xhrDeleteMenu.open(method, url, true);
+    xhrDeleteMenu.send();
+    xhrDeleteMenu.onreadystatechange = function () {
+        if (xhrDeleteMenu.readyState === XMLHttpRequest.DONE) {
+            var status = xhrDeleteMenu.status;
+            if (status === 0 || (status >= 200 && status < 400)) {
+                const res = JSON.parse(xhrDeleteMenu.responseText);
+                if (res == "ok") {
+                    console.log(res + ' Usuario eliminado con exito');
+                } else {
+                    //Mostrando errores por pantalla
+                    console.log(res, 'malo');
+                }
+            }
+        }
+    }
 }
 
 function selectMenuId(menuId) {

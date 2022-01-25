@@ -72,6 +72,19 @@ class Menus extends Controller
         die();
     }
 
+    //Delete Menu
+    public function eliminarMenuId($menuId)
+    {
+        $data = $this->model->deleteMenuId($menuId);
+        if($data == 1){
+            $msg = "ok";
+        }else{
+            $msg = "Error al eliminar Menú";
+        }
+        echo json_encode($msg, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
     //Select MenuId
     public function selectMenuId(int $menuId)
     {
