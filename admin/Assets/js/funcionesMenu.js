@@ -68,16 +68,16 @@ function createMenu(e) {
 
 function editMenu(e) {
     e.preventDefault();
-    const categorieName = document.getElementById("editMenuName");
-    const categorieDesc = document.getElementById("editMenuDesc");
-    const categorieDesc = document.getElementById("editMenuPrice");
-    const categorieDesc = document.getElementById("editMenuCategorieId");
-    if (categorieName.value == "" || categorieDesc.value == "" ) {
-        console.log("Necesita rellenar todos los campos")
-    } else {
+    const menuName = document.getElementById("editMenuName");
+    const menuDesc = document.getElementById("editMenuDesc");
+    const menuPrice = document.getElementById("editMenuPrice");
+    const menuCategorieId = document.getElementById("editMenuCategorieId");
+    // if (menuName.value == "" || menuDesc.value == "" ) {
+    //     console.log("Necesita rellenar todos los campos")
+    // } else {
         const xhrModifyMenu = new XMLHttpRequest(),
         method = "POST",
-        url = base_url + 'Menus/modificarMenu',
+        url = base_url + 'Menus/editMenu',
         frm = document.getElementById("frmEditMenus");
 
         xhrModifyMenu.open(method, url, true);
@@ -88,7 +88,7 @@ function editMenu(e) {
                 if (status === 0 || (status >= 200 && status < 400)) {
                     const res = JSON.parse(xhrModifyMenu.responseText);
                     if (res == "si") {
-                        console.log(res + ' Categoria modificada con exito');
+                        console.log(res + ' menu modificada con exito');
                     } else {
                         //Mostrando errores por pantalla
                         console.log(res, 'malo');
@@ -96,7 +96,7 @@ function editMenu(e) {
                 }
             }
         }
-    }
+    // }
 }
 
 function selectMenuId(menuId) {

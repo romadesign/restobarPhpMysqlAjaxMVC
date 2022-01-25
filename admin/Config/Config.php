@@ -5,6 +5,6 @@
 const host = "localhost";
 const user = "root";
 const password = "";
-const db = "opd";
+const db = "menu";
 const charset = "charset=utf-8";
 ?>

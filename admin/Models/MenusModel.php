@@ -1,6 +1,7 @@
 <?php 
 class MenusModel extends Query{
     //categories
+    private $menuId;
     private $menuName;
     private $menuDesc;
     private $menuPrice;
@@ -11,14 +12,8 @@ class MenusModel extends Query{
     {
         parent::__construct();
     }
-    public function getUsuario(string $username, string $password )
-    {
-        $sql = "SELECT * FROM users WHERE username ='$username' AND password ='$password'";
-        $data = $this->select($sql);
-        return $data;
-    }
-
     
+    //All Menus
     public function getMenus()
     {
         $sql = "SELECT * FROM `menu` ";
@@ -38,7 +33,7 @@ class MenusModel extends Query{
      public function createMenu(
         string $menuName, 
         string $menuDesc, 
-        string $menuPrice, 
+        int $menuPrice, 
         int $menuCategorieId,
         string $menuImage )
     {
@@ -73,19 +68,25 @@ class MenusModel extends Query{
 
     //Modification Menú
     public function modifyMenu(
-        string $categorieName, 
-        string $categorieDesc,
-        int $categorieId )
+        string $menuName, 
+        string $menuDesc, 
+        int $menuPrice, 
+        int $menuCategorieId,
+        int $menuId)
     {
-        $this->categorieName = $categorieName;
-        $this->categorieDesc = $categorieDesc;
-        $this->categorieId = $categorieId;
+        $this->menuName = $menuName;
+        $this->menuDesc = $menuDesc;
+        $this->menuPrice = $menuPrice;
+        $this->menuCategorieId = $menuCategorieId;
+        $this->menuId = $menuId;
          #update
-         $sql = "UPDATE `categories` SET  categorieName=?, categorieDesc=? WHERE categorieId =?";
+         $sql = "UPDATE `menu` SET  menuName=?, menuDesc=?,  menuPrice=?,  menuCategorieId=? WHERE menuId =?";
          $data = array(
-             $this->categorieName,
-             $this->categorieDesc,
-             $this->categorieId,
+             $this->menuName,
+             $this->menuDesc,
+             $this->menuPrice,
+             $this->menuCategorieId,
+             $this->menuId,
          );
          $givens = $this->save($sql, $data);
          if($givens == 1){

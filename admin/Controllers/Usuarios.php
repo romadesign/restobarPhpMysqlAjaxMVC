@@ -3,9 +3,9 @@ class Usuarios extends Controller{
     public function __construct()
     {
         session_start();
-        if(empty($_SESSION["userType"]) == "1" || empty($_SESSION["username"]) == "admin" ){
-            header("location :" .base_url. "Usuarios");
-        }
+        // if(empty($_SESSION["userType"]) == "1" || empty($_SESSION["username"]) == "admin" ){
+        //     header("location :" .base_url. "Usuarios");
+        // }
         parent::__construct();
         
     }
@@ -79,7 +79,7 @@ class Usuarios extends Controller{
      }
     
 
-    //Edit User
+    //Select User Id
     public function selectUserId(int $id)
     {   
         //Verificamos si nos da e Id seleccionado en el botton

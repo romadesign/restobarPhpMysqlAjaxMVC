@@ -102,7 +102,7 @@
                         </select>
                     </div>
                    
-                    <button type="submit" class="btn btn-sm btn-primary" onclick="editMenu(event);"> Create
+                    <button type="submit" class="btn btn-sm btn-primary" onclick="editMenu(event);"> Editar
                     </button>
                 </form>
             </div>
