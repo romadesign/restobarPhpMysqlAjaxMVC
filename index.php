@@ -1,6 +1,7 @@
 <?php
 require_once "Config/Config.php";
-    $ruta = !empty($_GET['url']) ? $_GET['url'] : "Home/index";
+    //Colocamos la ruta principal que va a tener 
+    $ruta = !empty($_GET['url']) ? $_GET['url'] : "Categorias/index";
     $array = explode("/", $ruta);// print_r($array);
     $controller = $array[0];
     $metodo = "index";
