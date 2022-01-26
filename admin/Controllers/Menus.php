@@ -4,9 +4,9 @@ class Menus extends Controller
     public function __construct()
     {
         session_start();
-        if(empty($_SESSION["userType"]) == "1" || empty($_SESSION["username"]) == "admin" ){
-            header("location :" .base_url. "Usuarios");
-        }
+        // if(empty($_SESSION["userType"]) == "1" || empty($_SESSION["username"]) == "admin" ){
+        //     header("location :" .base_url. "Usuarios");
+        // }
         parent::__construct();
     }
 
