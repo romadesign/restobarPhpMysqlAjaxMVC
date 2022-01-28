@@ -1,6 +1,7 @@
 <?php include "Views/Templates/header.php" ?>
 <!-- Page categorias -->
 
+<?php print_r($getMenuAndCategories) ?>
 
 <div class="container">
     <h1 class="h3 mb-0 text-gray-800">Menús</h1>
