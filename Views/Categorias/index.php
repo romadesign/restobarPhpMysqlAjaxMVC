@@ -1,12 +1,24 @@
 <?php include "Views/Templates/header.php" ?>
 <!-- Page categorias -->
 
-<?php print_r($getMenuAndCategories) ?>
-
 <div class="container">
-    <h1 class="h3 mb-0 text-gray-800">Menús</h1>
-    <div class="row" id="show_categories">
+    <div class="row">
+        <?php
+        foreach ($getCategorias as $menuCategorie) { ?>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <img class="image_menu w-100" src="data:image/png;base64,<?php echo base64_encode(file_get_contents($menuCategorie["categorieImage"])) ?>">
+                        <h5 class="card-title"><?php echo $menuCategorie["categorieName"] ?></h5>
+                        <p class="card-text"><?php echo $menuCategorie["categorieDesc"] ?></p>
+                        <a class="btn btn-primary" href="<?= base_url_user; ?>Categorias/menus/<?= $menuCategorie["categorieId"]; ?>" >Mirar los menús</a>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
     </div>
 </div>
 
 <?php include "Views/Templates/footer.php" ?>
+
+

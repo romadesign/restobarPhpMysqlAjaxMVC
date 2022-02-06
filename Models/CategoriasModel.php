@@ -11,27 +11,18 @@ class CategoriasModel extends Query{
         parent::__construct();
     }
 
-    //User List
+    //Get categorias
     public function getCategorias()
     {
         $sql = "SELECT * FROM categories";
         $data = $this->SelectAll($sql);
         return $data;
     }
-
-    //Select Categorie
-    public function selectCategoriaId(int $categorieId)
-    {
-        $sql = "SELECT * FROM `categories` WHERE categorieId  = $categorieId ";
-        $data = $this->select($sql);
-        return $data;
-    }
-
    
-    //Categorie select
-    public function getMenuAndCategories()
+    //Seleccionando menus por categorias
+    public function getMenuAndCategories($categorieId)
     {
-        $sql = "SELECT * FROM `menu` WHERE menuCategorieId = 12 ";
+        $sql = "SELECT * FROM `menu` WHERE menuCategorieId = $categorieId ";
         $data = $this->SelectAll($sql);
         return $data;
     }

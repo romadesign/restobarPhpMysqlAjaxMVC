@@ -3,9 +3,6 @@ class Categorias extends Controller{
     public function __construct()
     {
         session_start();
-        // if(empty($_SESSION["userType"]) == "1" || empty($_SESSION["username"]) == "admin" ){
-        //     header("location :" .base_url. "Usuarios");
-        // }
         parent::__construct();
         
     }
@@ -13,31 +10,23 @@ class Categorias extends Controller{
     public function index()
     {   
         //Menu and categorieId
-        $getMenuAndCategories = $this->model->getMenuAndCategories();
-        $this->views->getView($this, "index", $getMenuAndCategories);
+        $getCategorias = $this->model->getCategorias();
+        $this->views->getView($this, "index", $getCategorias);
     }
 
-    //Get Categorias
-    public function Listar()
-    {
-       $data = $this->model->getCategorias();
-       echo json_encode($data, JSON_UNESCAPED_UNICODE);
-       die();
-    }
-
-
-    //Select CategorieId
-    public function selectCategoriaId(int $categorieId)
+    public function menus($categorieId)
     {   
-        //Verificamos si nos da e Id seleccionado en el botton
+        //Para mostrar todos los menus por categorias
+        //getMenuAndCategories
         //print_r($categorieId);
-        $data = $this->model->selectCategoriaId($categorieId);
-        echo json_encode($data, JSON_UNESCAPED_UNICODE);
-        die();
-    
+        $data = $this->model->getMenuAndCategories($categorieId);
+        print_r($data);
+
+        $this->views->getView($this, "menus");
+        
     }
 
-   
+       
 
 
 }

@@ -1,6 +1,6 @@
 <?php 
 class Views{
-    public function getView($controlador, $vista, $getMenuAndCategories = ""){
+    public function getView($controlador, $vista, $getCategorias = "" ){
         $controlador = get_class($controlador);
         if($controlador == "Home"){
             $vista = "Views/".$vista.".php";
