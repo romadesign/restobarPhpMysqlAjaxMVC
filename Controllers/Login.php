@@ -1,5 +1,5 @@
 <?php
-class Categorias extends Controller
+class Login extends Controller
 {
 
     public function __construct()
@@ -10,28 +10,8 @@ class Categorias extends Controller
 
     public function index()
     {
-        $getCategorias = $this->model->getCategorias();
-        $this->views->getView($this, "index", $getCategorias);
+        $this->views->getView($this, "index");
     }
-
-    public function menuCategorie(int $categorieId)
-    {
-        $getMenuCategorie = $this->model->getMenuAndCategories($categorieId);
-        $this->views->getView($this, "menuCategorie", $getMenuCategorie);
-    }
-
-    public function menuDetails(int $menuId)
-    {
-        //Para mostrar todos los menus por categorias
-        //print_r($menuId);
-        $getMenuDetails = $this->model->getMenuDetails($menuId);
-        $this->views->getView($this, "menuDetails", $getMenuDetails);
-    }
-
-
-
-
-
 
     public function validarLogin()
     {

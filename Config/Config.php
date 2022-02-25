@@ -7,4 +7,3 @@ const user = "root";
 const password = "";
 const db = "opd";
 const charset = "charset=utf-8";
-?>

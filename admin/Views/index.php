@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -42,17 +43,18 @@
                                     </div>
                                     <form id="frmLogin" class="user">
                                         <div class="form-group">
-                                            <input type="text" class="form-control form-control-user"
-                                                id="username" name="username" aria-describedby="emailHelp"
+                                            <input type="text" class="form-control form-control-user" id="username"
+                                                name="username" aria-describedby="emailHelp"
                                                 placeholder="Ingrese usuario">
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user"
-                                                id="password" name="password" placeholder="Ingrese contraseña">
+                                            <input type="password" class="form-control form-control-user" id="password"
+                                                name="password" placeholder="Ingrese contraseña">
                                         </div>
                                         <div class="alert alert-danger d-none text-center" id="alerta" role="alert">
                                         </div>
-                                        <button class="btn btn-primary btn-user btn-block" type="submit" onclick="frmLogin(event)" >
+                                        <button class="btn btn-primary btn-user btn-block" type="submit"
+                                            onclick="frmLogin(event)">
                                             Login
                                         </button>
                                     </form>
@@ -79,7 +81,7 @@
     <script src="<?php echo base_url; ?>Assets/js/sb-admin-2.min.js"></script>
 
     <script>
-        const base_url="<?php echo base_url; ?>"
+    const base_url = "<?php echo base_url; ?>"
     </script>
 
     <!-- Mis scripts-->

@@ -1,5 +1,6 @@
-<?php 
-class CategoriasModel extends Query{
+<?php
+class CategoriasModel extends Query
+{
     //categories
     private $categorieId;
     private $categorieName;
@@ -10,7 +11,7 @@ class CategoriasModel extends Query{
     {
         parent::__construct();
     }
-    public function getUsuario(string $username, string $password )
+    public function getUsuario(string $username, string $password)
     {
         $sql = "SELECT * FROM users WHERE username ='$username' AND password ='$password'";
         $data = $this->select($sql);
@@ -27,30 +28,30 @@ class CategoriasModel extends Query{
 
     //Create categorie
     public function createCategoria(
-        string $categorieName, 
-        string $categorieDesc, 
-        string $categorieImage )
-    {
+        string $categorieName,
+        string $categorieDesc,
+        string $categorieImage
+    ) {
         $this->categorieName = $categorieName;
         $this->categorieDesc = $categorieDesc;
         $this->categorieImage = $categorieImage;
         //Verification or categorie
         $verificationCategorie = "SELECT * FROM categories WHERE categorieName = '$this->categorieName'";
-        $exitsCategorie = $this->select( $verificationCategorie);
-        if(empty($exitsCategorie)){
-            $sql = "INSERT INTO categories ( categorieName, categorieDesc, categorieImage) VALUES (?,?,?)"; 
+        $exitsCategorie = $this->select($verificationCategorie);
+        if (empty($exitsCategorie)) {
+            $sql = "INSERT INTO categories ( categorieName, categorieDesc, categorieImage) VALUES (?,?,?)";
             $data = array(
                 $this->categorieName,
                 $this->categorieDesc,
                 $this->categorieImage,
             );
             $givens = $this->save($sql, $data);
-            if($givens == 1){
+            if ($givens == 1) {
                 $res = "ok";
-            }else{
+            } else {
                 $res = "error";
             }
-        }else{
+        } else {
             $res = "existe";
         }
         return $res;
@@ -58,26 +59,26 @@ class CategoriasModel extends Query{
 
     //Modification user 
     public function modifyCategoria(
-        string $categorieName, 
+        string $categorieName,
         string $categorieDesc,
-        int $categorieId )
-    {
+        int $categorieId
+    ) {
         $this->categorieName = $categorieName;
         $this->categorieDesc = $categorieDesc;
         $this->categorieId = $categorieId;
-         #update
-         $sql = "UPDATE `categories` SET  categorieName=?, categorieDesc=? WHERE categorieId =?";
-         $data = array(
-             $this->categorieName,
-             $this->categorieDesc,
-             $this->categorieId,
-         );
-         $givens = $this->save($sql, $data);
-         if($givens == 1){
-             $res = "modificado";
-         }else{
-             $res = "error";
-         }
+        #update
+        $sql = "UPDATE `categories` SET  categorieName=?, categorieDesc=? WHERE categorieId =?";
+        $data = array(
+            $this->categorieName,
+            $this->categorieDesc,
+            $this->categorieId,
+        );
+        $givens = $this->save($sql, $data);
+        if ($givens == 1) {
+            $res = "modificado";
+        } else {
+            $res = "error";
+        }
         return $res;
     }
 
@@ -93,7 +94,7 @@ class CategoriasModel extends Query{
     {
         $this->categorieId = $categorieId;
         $sql = "DELETE FROM  `categories` WHERE categorieId = ?";
-        $data = array( $this->categorieId);
+        $data = array($this->categorieId);
         $givens = $this->save($sql, $data);
         return $givens;
     }
