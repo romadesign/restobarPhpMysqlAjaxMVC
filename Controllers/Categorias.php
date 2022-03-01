@@ -4,7 +4,6 @@ class Categorias extends Controller
 
     public function __construct()
     {
-
         parent::__construct();
     }
 
@@ -27,10 +26,6 @@ class Categorias extends Controller
         $getMenuDetails = $this->model->getMenuDetails($menuId);
         $this->views->getView($this, "menuDetails", $getMenuDetails);
     }
-
-
-
-
 
 
     public function validarLogin()

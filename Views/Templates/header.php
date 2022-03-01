@@ -46,11 +46,14 @@
                 </ul>
                 <div class="d-flex">
                     <button type="button" class="btn btn-ligth mx-2"><i class="fas fa-shopping-cart"></i></button>
-                    <button type="button" class="btn btn-light">Login</button>
-                    <button type="button" class="btn btn-light" data-toggle="modal"
-                        data-target="#loginModal">Login</button>
+                    <button type="button" class="btn btn-light" data-bs-toggle="modal"
+                        data-bs-target="#loginModal">Login</button>
                     <button type="button" class="btn btn-primary">Registrar</button>
+                    <?php echo $_SESSION["username"] ?>
                 </div>
             </div>
         </div>
     </nav>
+
+
+    <?php include "./Views/Templates/login.php" ?>

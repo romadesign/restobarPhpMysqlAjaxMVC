@@ -1,6 +1,5 @@
 <?php include "Views/Templates/header.php" ?>
 <!-- Page categorias -->
-<?php echo $_SESSION["username"] ?>
 <div class="container">
     <div class="row">
         <?php
@@ -21,6 +20,8 @@
         <?php } ?>
     </div>
 </div>
+
+
 
 
 <?php include "Views/Templates/footer.php" ?>
