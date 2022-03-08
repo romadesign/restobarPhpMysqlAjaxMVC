@@ -1,4 +1,5 @@
 <?php include "Views/Templates/header.php" ?>
+
 <!-- Page categorias -->
 <div class="container">
     <div class="row">
@@ -21,7 +22,7 @@
     </div>
 </div>
 
-
+<?php echo $_SESSION['username'] ?>
 
 
 <?php include "Views/Templates/footer.php" ?>

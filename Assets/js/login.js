@@ -14,7 +14,7 @@ function frmLogin(e) {
     } else {
         const xhrLogin = new XMLHttpRequest(),
             method = "POST",
-            url = base_url_user + 'Categorias/validarLogin',
+            url = base_url_user + 'Login/validarLogin',
             frm = document.getElementById("frmLogin");
 
         //Metodo 1
