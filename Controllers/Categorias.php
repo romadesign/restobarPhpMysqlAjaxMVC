@@ -1,3 +1,4 @@
+
 <?php
 class Categorias extends Controller
 {
@@ -12,6 +13,7 @@ class Categorias extends Controller
     {
         $getCategorias = $this->model->getCategorias();
         $this->views->getView($this, "index", $getCategorias);
+        //Para mostrar todos los menus por categorias
     }
 
     public function menuCategorie(int $categorieId)

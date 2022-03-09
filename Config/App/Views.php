@@ -1,7 +1,7 @@
 <?php
 class Views
 {
-    public function getView($controlador, $vista, $getCategorias = "")
+    public function getView($controlador, $vista, $getCategorias = "", $getItemsCarritos = "")
     {
         $controlador = get_class($controlador);
         if ($controlador == "Home") {
