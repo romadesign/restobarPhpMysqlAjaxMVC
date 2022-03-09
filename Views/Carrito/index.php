@@ -10,6 +10,8 @@
                 <div class="card-body">
                     <h5 class="card-title"><?php echo $menuCategorie["menuId"] ?></h5>
                     <p class="card-text"><?php echo $menuCategorie["itemQuantity"] ?></p>
+                    <p class="card-text"><?php echo $menuCategorie["menuName"] ?></p>
+
                 </div>
             </div>
         </div>
