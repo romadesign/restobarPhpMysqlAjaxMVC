@@ -51,10 +51,12 @@ class Categorias extends Controller
         $userId = $_SESSION["id"];
 
         $data = $this->model->addMenuCart($menuId, $itemQuantity, $userId);
-        if ($data == "1") {
-            $msg = "si";
+        if ($data == "ok") {
+            $msg = "Item agregado al carrito";
+        }else if($data == "existe"){
+            $msg = "Item ya existe en tu carrito";
         }else {
-            $msg = "Error al crear una nueva categoria";
+            $msg = "Este item ya esta agregado a tu carrito";
         }
 
         echo json_encode($msg, JSON_UNESCAPED_UNICODE);

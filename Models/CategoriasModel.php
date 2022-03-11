@@ -79,10 +79,21 @@ class CategoriasModel extends Query
         $this->menuId = $menuId;
         $this->itemQuantity = $itemQuantity;
         $this->userId = $userId;
-
-        $sql = "INSERT INTO viewcart (menuId, itemQuantity, userId) VALUES (?,?,?)";
-        $data = array($this->menuId, $this->itemQuantity, $this->userId);
-        $resul = $this->insert($sql, $data);
-        return $resul;
+        //Verification or categorie
+        $verificationViewCart = "SELECT * FROM viewcart WHERE menuId = $this->menuId";
+        $exitsViewCart = $this->select($verificationViewCart);
+        if(empty($exitsViewCart)){
+            $sql = "INSERT INTO viewcart (menuId, itemQuantity, userId) VALUES (?,?,?)";
+            $data = array($this->menuId, $this->itemQuantity, $this->userId);
+            $resul = $this->insert($sql, $data);
+            if($resul == 1){
+                $res = "ok";
+            }else {
+                $res = "error";
+            }
+        }else {
+            $res = "existe";
+        }
+        return $res;
     }
 }
