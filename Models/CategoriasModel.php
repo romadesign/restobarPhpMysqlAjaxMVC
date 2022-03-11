@@ -3,7 +3,9 @@ class CategoriasModel extends Query
 {
     //categories
     private $categorieId;
-    private $categorieName;
+    private $menuId;
+    private $userId;
+    private $itemQuantity;
     private $categorieDesc;
     private $categorieImage;
 
@@ -57,5 +59,30 @@ class CategoriasModel extends Query
         $sql = "SELECT * FROM menu WHERE menuId = $this->menuId ";
         $data =  $this->select($sql);
         return $data;
+    }
+
+     //Select Categorie
+    public function selectMenuIdAddCartItem(int $menuId)
+    {
+        $sql = "SELECT * FROM `menu` WHERE menuId = $menuId";
+        // $sql = "SELECT * FROM `menu` INNER JOIN categories on menuCategorieId = categorieId WHERE categorieId = $this->categorieId ";
+
+        $data = $this->select($sql);
+        return $data;
+    }
+
+
+
+    //Agregando menu al carrito de compras por userLogeado
+    public function addMenuCart(int $menuId, int $itemQuantity, int $userId)
+    {   
+        $this->menuId = $menuId;
+        $this->itemQuantity = $itemQuantity;
+        $this->userId = $userId;
+
+        $sql = "INSERT INTO viewcart (menuId, itemQuantity, userId) VALUES (?,?,?)";
+        $data = array($this->menuId, $this->itemQuantity, $this->userId);
+        $resul = $this->insert($sql, $data);
+        return $resul;
     }
 }

@@ -1,42 +1,49 @@
-// function getMenuCategorias(){
-//     const xhttpMenuCategorias = new XMLHttpRequest();
-//     xhttpMenuCategorias.open('GET', base_url_user + 'Categorias/getCategories', true);
-//     xhttpMenuCategorias.send();
-//     xhttpMenuCategorias.onreadystatechange = function () {
-//         if (xhttpMenuCategorias.readyState == 4 && xhttpMenuCategorias.status == 200) {
-//             let data = JSON.parse(this.responseText);
-//             // console.log(data)
-//             let res = document.getElementById("menuCategorie");
-//             for (let categorie of data) {
-//                 console.log(categorie)
-//                 res.innerHTML += `
-//                 <div class="col-md-4">
-//                     <div class="card">
-//                         <div class="card-body">
-//                             <img class="image_menu w-100"  src="${categorie.categorieImage}">
-//                             <h5 class="card-title">${categorie.categorieName} </h5>
-//                             <p class="card-text"> ${categorie.categorieDesc} </p>
-//                         </div>
-//                         <button type="button" onclick="selectCategoriaId(${categorie.categorieId})" >Mirar menús</button>
-//                     </div>
-//                 </div>
-//                 `
-//             }
-//         }
-//     }
-// }
-// getMenuCategorias();
+function selectMenuAddCart(menuId) {
+    console.log(menuId)
+
+    const xhrSelectAddCarMenu = new XMLHttpRequest(),
+        method = "GET",
+        url = base_url_user + 'Categorias/selectMenuIdAddCart/' + menuId,
+        frm = document.getElementById("frmAddCartMenu");
+
+    xhrSelectAddCarMenu.open(method, url, true);
+    xhrSelectAddCarMenu.send(new FormData(frm));
+    xhrSelectAddCarMenu.onreadystatechange = function () {
+        if (xhrSelectAddCarMenu.readyState === XMLHttpRequest.DONE) {
+            var status = xhrSelectAddCarMenu.status;
+            if (status === 0 || (status >= 200 && status < 400)) {
+                const res = JSON.parse(xhrSelectAddCarMenu.responseText);
+                console.log(res.menuId)
+                document.getElementById("menuId").value = res.menuId
+                document.getElementById("menuName").value = res.menuName
+                // document.getElementById("menuPrice").value = res.menuPrice
+            }
+        }
+    }
+}
 
 
-// function selectCategoriaId(categorieId){
+function addMenuAlCarrito() {
+    const xhttpAddMenuAlCart = new XMLHttpRequest(),
+        method = "POST",
+        url = base_url_user + 'Categorias/ingresarMenuAlCarrito',
+        frm = document.getElementById("frmAddCartMenu");
 
-//     const xhttpMenuCategoriaId = new XMLHttpRequest();
-//     xhttpMenuCategoriaId.open('GET', base_url_user + 'Categorias/menuCategoria/');
-//     xhttpMenuCategoriaId.send();
-//     if (xhttpMenuCategoriaId.readyState == 4 && xhttpMenuCategoriaId.status == 200) {
-//         let data = JSON.parse(this.responseText);
-//         console.log(data)
-// window.location = base_url_user + "Categorias/menuCategorieId" ;
-        
-//     }
-// }
+    xhttpAddMenuAlCart.open(method, url, true);
+    xhttpAddMenuAlCart.send(new FormData(frm));
+    xhttpAddMenuAlCart.onreadystatechange = function () {
+        if (xhttpAddMenuAlCart.readyState === XMLHttpRequest.DONE) {
+            var status = xhttpAddMenuAlCart.status;
+            if (status === 0 || (status >= 200 && status < 400)) {
+                const res = JSON.parse(xhttpAddMenuAlCart.responseText);
+                if (res == "si") {
+                    console.log(res + ' Usuario registrado con exito');
+                } else {
+                    //Mostrando errores por pantalla
+                    console.log(res, 'malo');
+                }
+            }
+        }
+    }
+
+}
