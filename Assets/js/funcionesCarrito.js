@@ -13,8 +13,8 @@ function getMenuPorUsuarios() {
                 const itemQuantity = carritoUser.itemQuantity
                 const menuPrecioCantidad = menuPrice * itemQuantity
                 console.log(menuPrecioCantidad)
-
-
+                //Show menu Quantity
+                document.getElementById('navBarQuantityMenu').innerHTML = `${itemQuantity}`
 
                 res.innerHTML += `
                        <th scope="row"> ${carritoUser.menuId} </th>

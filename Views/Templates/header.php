@@ -12,6 +12,8 @@
 
     <!-- Custom fonts for this template-->
     <link href="<?php echo base_url_user; ?>Assets/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+     <!-- Custom fonts for this template-->
+     <link href="<?php echo base_url_user; ?>Assets/css/style.css" rel="stylesheet" type="text/css">
     <!-- Custom styles for this template-->
     <link href="<?php echo base_url_user; ?>Assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -45,17 +47,30 @@
                 $login = isset($_SESSION['username']);
                 if ($login == "") { ?>
                     <div class="d-flex">
-                        <a class="dropdown-item" href="<?php echo base_url_user; ?>Carrito"><i class="fas fa-shopping-cart"></i>Cart</a>
+                        <a class="dropdown-item" href="<?php echo base_url_user; ?>Carrito">
+                            <i class="fas fa-shopping-cart"></i>
+                            <i  id="navBarQuantityMenu" class="bi bi-cart">0</i>
+                        </a>
                         <a class="dropdown-item" href="<?php echo base_url_user; ?>Login">Login</a>
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registerUser">
-                        Register
+                            Register
                         </button>
 
                     </div>
                 <?php } else { ?>
                     <ul class="navbar-nav mb-2 mb-lg-0">
-                        <a class="dropdown-item" href="<?php echo base_url_user; ?>Carrito"><i class="fas fa-shopping-cart"></i>Cart</a>
+                        <a class="dropdown-item" href="<?php echo base_url_user; ?>Carrito">
+                            <i class="fas fa-shopping-cart"></i>
+                            <i  id="navBarQuantityMenu" class="bi bi-cart"></i>
+                        </a>
+                        <!-- Message -->
+                        <div class="icon-badge-container d-flex align-items-center">
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#adminReply">
+                                <i class="far fa-envelope icon-badge-icon"></i>
+                                <div class="icon-badge "><span id="totalMessage" class="fst-italic">0</span>
+                            </a>
+                        </div>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <?php echo $_SESSION['username'] ?>
