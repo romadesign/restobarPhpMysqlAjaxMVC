@@ -54,9 +54,9 @@ class Categorias extends Controller
         if ($data == "ok") {
             $msg = "Item agregado al carrito";
         }else if($data == "existe"){
-            $msg = "Item ya existe en tu carrito";
-        }else {
             $msg = "Este item ya esta agregado a tu carrito";
+        }else {
+            $msg = "Este item ya esta agregado a tu carrito x2";
         }
 
         echo json_encode($msg, JSON_UNESCAPED_UNICODE);

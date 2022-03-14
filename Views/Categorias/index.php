@@ -26,8 +26,5 @@
 
 </div>
 
-<?php echo $_SESSION['username'] ?>
-<?php echo $_SESSION['id'] ?>
-
 
 <?php include "Views/Templates/footer.php" ?>

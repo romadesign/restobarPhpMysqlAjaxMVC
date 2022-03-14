@@ -7,11 +7,15 @@ function getMenuPorUsuarios() {
             let data = JSON.parse(this.responseText);
             console.log(data)
             let res = document.getElementById("carritoUser");
-            for (let carritoUser of data) {
+            for (const carritoUser of data) {
                 console.log(carritoUser)
                 const menuPrice = carritoUser.menuPrice
                 const itemQuantity = carritoUser.itemQuantity
                 const menuPrecioCantidad = menuPrice * itemQuantity
+                console.log(menuPrecioCantidad)
+
+
+
                 res.innerHTML += `
                        <th scope="row"> ${carritoUser.menuId} </th>
                        <td>${carritoUser.menuName}</td>
@@ -20,16 +24,32 @@ function getMenuPorUsuarios() {
                        ${itemQuantity} und.
                        <button type="button" onclick="selectMenuIdCant(${carritoUser.menuId})" data-bs-toggle="modal" data-bs-target="#editMenu">+</button>
                        </td>
-                       <td>${menuPrecioCantidad}</td>
+                       <td id="priceTotsal">${menuPrecioCantidad}</td>
                        <td class="d-flex">
                         <button type="button" onclick="deleteMenuId(${carritoUser.menuId})">Delete</button>
                        </td>
-                `
+                       
+                    `
             }
+
+            //Mostrando el precio total sumanando por datos de cada fila (ID)
+            let preciosSpan = document.querySelectorAll('#priceTotsal');
+            let total = 0;
+
+            preciosSpan.forEach(function (element) {
+                let value = element.innerHTML;
+                // eliminamos todo lo que no sea numero
+                value = parseFloat(value.replace(/(?!-)[^0-9.]/g, ''))
+                total += value
+            })
+            document.getElementById('total').innerHTML = `${total}€`
+            document.getElementById('totalfinal').innerHTML = `${total}€`
+
         }
     }
 }
 getMenuPorUsuarios();
+
 
 
 function editCantidad(e) {
@@ -71,7 +91,6 @@ function selectMenuIdCant(menuId) {
             var status = xhrSelectMenuCantidad.status;
             if (status === 0 || (status >= 200 && status < 400)) {
                 console.log(xhrSelectMenuCantidad.responseText)
-
                 const res = JSON.parse(xhrSelectMenuCantidad.responseText);
                 console.log(res)
                 console.log(res.menuId)
@@ -99,6 +118,7 @@ function deleteMenuId(menuId) {
                 const res = JSON.parse(xhrDeleteMenu.responseText);
                 if (res == "ok") {
                     console.log(res + ' Menú eliminado con exito');
+                    window.location.reload()
                 } else {
                     //Mostrando errores por pantalla
                     console.log(res, 'malo');

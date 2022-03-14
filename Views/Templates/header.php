@@ -15,6 +15,7 @@
     <!-- Custom styles for this template-->
     <link href="<?php echo base_url_user; ?>Assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
+    <?php include_once('Register.php') ?>
 
 </head>
 
@@ -46,7 +47,11 @@
                     <div class="d-flex">
                         <a class="dropdown-item" href="<?php echo base_url_user; ?>Carrito"><i class="fas fa-shopping-cart"></i>Cart</a>
                         <a class="dropdown-item" href="<?php echo base_url_user; ?>Login">Login</a>
-                        <button type="button" class="btn btn-primary">Registrar</button>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registerUser">
+                        Register
+                        </button>
+
                     </div>
                 <?php } else { ?>
                     <ul class="navbar-nav mb-2 mb-lg-0">
