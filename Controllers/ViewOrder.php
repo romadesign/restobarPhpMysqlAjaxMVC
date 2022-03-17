@@ -22,4 +22,15 @@ class ViewOrder extends Controller
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
         die();
     }
+
+    //Sele
+    //Select Categorie
+    public function selectItemsOrders(int $orderId)
+    {   
+        $userId = $_SESSION['id'];
+        //Verificamos si nos da e Id seleccionado en el botton
+        $data = $this->model->getOrdersItems($orderId, $userId );
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        die();
+    }
 }

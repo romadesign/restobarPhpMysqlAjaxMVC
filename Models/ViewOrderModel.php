@@ -14,5 +14,17 @@ class ViewOrderModel extends Query
         return $data;
     }  
 
+
+    //Select Categorie
+    public function getOrdersItems(int $orderId)
+    {
+        $sql = "SELECT * FROM orderitems OT
+                        INNER JOIN menu M on M.menuId = OT.menuId
+                        WHERE OT.orderId = $orderId";
+        $data = $this->SelectAll($sql);
+        return $data;
+    }
+
+
     
 }

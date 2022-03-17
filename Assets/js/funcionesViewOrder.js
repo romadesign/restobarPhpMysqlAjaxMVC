@@ -15,16 +15,91 @@ function getOrderView() {
                     <td>${order.paymentMode}</td>
                     <td>${order.orderDate}</td>
                     <td>
-                    <button id="orderStatusViews" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#statusOrder">
-                    ${order.orderStatus}
-                    </button>
+                        <div id="orderStatusViews"  data-bs-toggle="modal" data-bs-target="#statusOrder">
+                            ${order.orderStatus}
+                        </div>
                     </td>
-                    <td>${order.orderId}</td>
+                    <td >
+                        <button type="button"  data-bs-toggle="modal" data-bs-target="#frmOrder" onclick="selecToRder(${order.orderId})" >${order.orderId}</button>
+                    </td>
                 `
             }
+
+            //Validar estado del pedido
+            let status = document.querySelectorAll('#orderStatusViews');
+            for (let statu of status) {
+                if (statu.innerHTML == 0) {
+                    statu.innerHTML = `<div class="alert alert-primary" role="alert">
+                                            Order Placed. 
+                                        </div>`
+                } else if (statu.innerHTML == 1) {
+                    statu.innerHTML = `<div class="alert alert-primary" role="alert">
+                                            Order Confirmed. 
+                                        </div>`
+                } else if (statu.innerHTML == 2) {
+                    statu.innerHTML = `<div class="alert alert-primary" role="alert">
+                                            Preparing your Order. 
+                                        </div>`
+                } else if (statu.innerHTML == 3) {
+                    statu.innerHTML = `<div class="alert alert-primary" role="alert">
+                                                Your order is on the way! 
+                                        </div>`
+                } else if (statu.innerHTML == 4) {
+                    statu.innerHTML = `<div class="alert alert-primary" role="alert">
+                                             Order Delivered. 
+                                        </div>`
+                } else if (statu.innerHTML == 5) {
+                    statu.innerHTML = `<div class="alert alert-primary" role="alert">
+                                            Order Denied. 
+                                        </div>`
+                } else {
+                    statu.innerHTML = `<div class="alert alert-danger" role="alert">
+                                            Cancelado
+                                        </div>`
+                }
+            }
+
         }
-       
     }
-    
+
 }
 getOrderView();
+
+function selecToRder(orderId) {
+    const xhrSelectOrdersViews = new XMLHttpRequest(),
+        method = "GET",
+        url = base_url_user + 'ViewOrder/selectItemsOrders/' + orderId,
+        frm = document.getElementById("frmOrderItemsViews");
+
+    xhrSelectOrdersViews.open(method, url, true);
+    xhrSelectOrdersViews.send(new FormData(frm));
+    xhrSelectOrdersViews.onreadystatechange = function () {
+        const menu = ""
+        if (xhrSelectOrdersViews.readyState === XMLHttpRequest.DONE) {
+            var status = xhrSelectOrdersViews.status;
+            if (status === 0 || (status >= 200 && status < 400)) {
+                const res = JSON.parse(xhrSelectOrdersViews.responseText);
+                for (let menu of res) {
+                    console.log(menu);
+                    console.log("acabo");
+                    console.log(menu.menuName);
+                    let contentMenu = document.getElementById("contenMenu");
+                    contentMenu.innerHTML += `
+                        <tr>
+                            <th scope="row">${menu.menuId}</th>
+                            <td>${menu.menuName}</td>
+                            <td>${menu.itemQuantity}</td>
+                        </tr>
+                    `
+
+                }
+
+            }
+
+        }
+    }
+}
+
+function deleteOrderbutton() {
+    document.getElementById("contenMenu").remove();
+}

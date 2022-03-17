@@ -14,13 +14,12 @@ function getMenuPorUsuarios() {
                 const menuPrecioCantidad = menuPrice * itemQuantity
                 console.log(menuPrecioCantidad)
                 //Show menu Quantity
-                document.getElementById('navBarQuantityMenu').innerHTML = `${itemQuantity}`
 
                 res.innerHTML += `
                        <th scope="row"> ${carritoUser.menuId} </th>
                        <td>${carritoUser.menuName}</td>
                        <td>${menuPrice} </td>
-                       <td>
+                       <td id="cantidadMenu">
                        ${itemQuantity} und.
                        <button type="button" onclick="selectMenuIdCant(${carritoUser.menuId})" data-bs-toggle="modal" data-bs-target="#editMenu">+</button>
                        </td>
@@ -32,6 +31,7 @@ function getMenuPorUsuarios() {
                     `
             }
 
+          
             //Mostrando el precio total sumanando por datos de cada fila (ID)
             let preciosSpan = document.querySelectorAll('#priceTotsal');
             let total = 0;

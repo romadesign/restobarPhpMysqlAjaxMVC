@@ -1,6 +1,7 @@
 <?php 
 include "Views/Templates/header.php";
 include "Views/Templates/StatusOrder.php";
+include "Views/Templates/OrderItemModal.php";
 ?>
 
 <div class="container">
