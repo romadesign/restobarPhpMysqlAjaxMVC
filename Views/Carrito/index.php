@@ -1,4 +1,7 @@
-<?php include "Views/Templates/header.php" ?>
+<?php 
+include "Views/Templates/header.php";
+include "Views/Templates/CheckoutModal.php";
+ ?>
 <?php
 if(isset($_SESSION['username'])){?>
     <div class="container">

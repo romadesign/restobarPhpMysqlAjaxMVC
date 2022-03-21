@@ -44,6 +44,7 @@ function getMenuPorUsuarios() {
             })
             document.getElementById('total').innerHTML = `${total}€`
             document.getElementById('totalfinal').innerHTML = `${total}€`
+            document.getElementById('amount').value = total
 
         }
     }
@@ -122,6 +123,32 @@ function deleteMenuId(menuId) {
                 } else {
                     //Mostrando errores por pantalla
                     console.log(res, 'malo');
+                }
+            }
+        }
+    }
+}
+
+function addCheckoutUser(e) {
+    e.preventDefault();
+
+    const xhttpCheckOut = new XMLHttpRequest(),
+        method = "POST",
+        url = base_url_user + 'Carrito/realiandoOrder',
+        frm = document.getElementById("checkout");
+
+    xhttpCheckOut.open(method, url, true);
+    xhttpCheckOut.send(new FormData(frm));
+    xhttpCheckOut.onreadystatechange = function () {
+        if (xhttpCheckOut.readyState === XMLHttpRequest.DONE) {
+            var status = xhttpCheckOut.status;
+            if (status === 0 || (status >= 200 && status < 400)) {
+                const res = JSON.parse(xhttpCheckOut.responseText);
+                console.log(res)
+                if (res == "ok") {
+                   alert(res)
+                } else {
+                   
                 }
             }
         }
