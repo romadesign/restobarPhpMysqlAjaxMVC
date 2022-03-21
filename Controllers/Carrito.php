@@ -80,7 +80,7 @@ class Carrito extends Controller
         $dataOrderInsert = $this->model->insertOrders($userId, $address, $zipcode, $phone, $amount);
 
         if ($dataOrderInsert == "ok") {
-            //Capturando el ultimo orderId del insert realizando 
+            //Capturando el ultimo orderId del insert realizado 
             $ultimoOrderIdUser = $this->model->ultmimoOrderIdUser($userId);
             $orderId = $ultimoOrderIdUser[0]["orderId"];
 
@@ -93,8 +93,12 @@ class Carrito extends Controller
                 //insertando el menuId and itemQuantity para agregar a la tabla orderitems
                 $this->model->insertOrderItems($orderId, $menuId, $itemQuantity);
             }
+            //Eliminando los menus agregados al carrito por userId
+            $deleteViewCartMenus = $this->model->deleteViewcartMenusUser($userId);
+            if($deleteViewCartMenus == 'ok'){
+                $msg = "eliminado";
+            }
 
-            $msg = "si";
         } else {
             $msg = "Error al crear una nueva categoria";
         }

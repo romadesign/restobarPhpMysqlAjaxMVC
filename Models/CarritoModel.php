@@ -145,60 +145,17 @@ class CarritoModel extends Query
     }
 
     //4.- Eliminar todos los menus agregados al carrito por usuario para terminar la comprar(order)
+    public function deleteViewcartMenusUser(int $userId){
+        $this->userId = $userId;
+        $sql = "DELETE FROM viewcart WHERE userId = ?";
+        $datos = array($this->userId);
+        $data = $this->save($sql, $datos);
+        if($data == 1 ){
+            $res = "ok";
+        }else{
+            $res = "error";
+        }
+        return $res;
+    }
 }
 
-
-// public function checkOut(
-//     int $userId,
-//     string $address,
-//     int $zipcode,
-//     int $phone,
-//     int $amount
-// ) {
-//     $this->userId = $userId;
-//     $this->address = $address;
-//     $this->zipcode = $zipcode;
-//     $this->phone = $phone;
-//     $this->amount = $amount;
-
-//     $selectCkecout = "INSERT INTO orders (userId, address, zipCode, phoneNo, amount, paymentMode, orderStatus, orderDate) VALUES (?,?,?,?,?,?,?)";
-//     $data = array(
-//         $this->userId,
-//         $this->address,
-//         $this->zipcode,
-//         $this->phone,
-//         $this->amount,
-//         0,
-//         0,
-//         'current_timestamp()',
-//     );
-//     $orderId = $selectCkecout['orderId'];
-//     $givens = $this->save($selectCkecout, $data);
-//     if ($givens == 1) {
-//         $selectViewCart = "SELECT * FROM viewcart WHERE userId = $_SESSION[id]";
-//         $viewCart = $this->SelectAll($selectViewCart);
-//         if ($viewCart) {
-//             $menuId = $viewCart['menuId'];
-//             $itemQuantity = $viewCart['itemQuantity'];
-//             $itemSql = "INSERT INTO orderitems (orderId, menuId, itemQuantity) VALUES (?,?,?)";
-//             $dataOrders = array(
-//                 $orderId,
-//                 $menuId,
-//                 $itemQuantity,
-//             );
-//             $data = $this->save($itemSql, $dataOrders);
-//             if ($data == 1) {
-//                 $res = "ok";
-//             } else {
-//                 $res = "error";
-//             }
-//             return $res;
-//         }
-//         $deleteSqlViewcart = "DELETE FROM viewcart WHERE userId = ?";
-//         $deleteData = array($_SESSION["id"]);
-//         $givens = $this->save($deleteSqlViewcart, $deleteData);
-//         return $givens;
-//     } else {
-//         $res = "error";
-//     }
-// }
