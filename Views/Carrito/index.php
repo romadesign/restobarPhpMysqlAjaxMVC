@@ -5,7 +5,7 @@ include "Views/Templates/CheckoutModal.php";
 <?php
 if(isset($_SESSION['username'])){?>
     <div class="container">
-        <div class="row">
+        <div class="row content">
         <div class="alert alert-primary" role="alert">
         Info! El pago en línea está actualmente deshabilitado, así que elija contra reembolso. 
         </div>
@@ -33,7 +33,6 @@ if(isset($_SESSION['username'])){?>
              <h3> RESUMEN DE PEDIDO</h3>
             <div class="card wish-list mb-3">
                 <div class="pt-4 border bg-light rounded p-3">
-                    <h5 class="mb-3 text-uppercase font-weight-bold text-center">RESUMEN DE PEDIDO</h5>
                     <ul class="list-group list-group-flush">
                         <li
                             class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0 bg-light">
@@ -87,7 +86,7 @@ if(isset($_SESSION['username'])){?>
                     <div class="form-group d-flex">
                         <input type="hidden" id="menuId" name="menuId">
                         <input type="number" class="form-control" id="edititemQuantity" name="edititemQuantity" Placeholder="Price:" required min="1">
-                        <button type="submit" class="btn btn-sm btn-primary" onclick="editCantidad(event) || location.reload()"> Editar </button>
+                        <button type="submit" class="btn btn-sm btn-primary" onclick="editCantidad(event)"> Editar </button>
                     </div>
                 </form>
             </div>

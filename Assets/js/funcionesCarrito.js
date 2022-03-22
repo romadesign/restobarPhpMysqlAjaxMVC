@@ -5,7 +5,6 @@ function getMenuPorUsuarios() {
     xhttpMenuPorUsuario.onreadystatechange = function () {
         if (xhttpMenuPorUsuario.readyState == 4 && xhttpMenuPorUsuario.status == 200) {
             let data = JSON.parse(this.responseText);
-            console.log(data)
             let res = document.getElementById("carritoUser");
             for (const carritoUser of data) {
                 console.log(carritoUser)
@@ -18,20 +17,19 @@ function getMenuPorUsuarios() {
                 res.innerHTML += `
                        <th scope="row"> ${carritoUser.menuId} </th>
                        <td>${carritoUser.menuName}</td>
-                       <td>${menuPrice} </td>
+                       <td>${menuPrice} €</td>
                        <td id="cantidadMenu">
-                       ${itemQuantity} und.
-                       <button type="button" onclick="selectMenuIdCant(${carritoUser.menuId})" data-bs-toggle="modal" data-bs-target="#editMenu">+</button>
+                       ${itemQuantity}
+                       <button class="button-editItem" type="button" onclick="selectMenuIdCant(${carritoUser.menuId})" data-bs-toggle="modal" data-bs-target="#editMenu">+</button>
                        </td>
-                       <td id="priceTotsal">${menuPrecioCantidad}</td>
+                       <td id="priceTotsal">${menuPrecioCantidad} €</td>
                        <td class="d-flex">
-                        <button type="button" onclick="deleteMenuId(${carritoUser.menuId})">Delete</button>
+                        <button class="button-delete" type="button" onclick="deleteMenuId(${carritoUser.menuId})"><i class="fa fa-trash" aria-hidden="true"></i></button>
                        </td>
                        
                     `
             }
 
-          
             //Mostrando el precio total sumanando por datos de cada fila (ID)
             let preciosSpan = document.querySelectorAll('#priceTotsal');
             let total = 0;
@@ -45,7 +43,6 @@ function getMenuPorUsuarios() {
             document.getElementById('total').innerHTML = `${total}€`
             document.getElementById('totalfinal').innerHTML = `${total}€`
             document.getElementById('amount').value = total
-
         }
     }
 }
@@ -68,7 +65,10 @@ function editCantidad(e) {
             if (status === 0 || (status >= 200 && status < 400)) {
                 const res = JSON.parse(xhrModifyCantidad.responseText);
                 if (res == "si") {
+
                     console.log(res + ' menu modificada con exito');
+                    document.getElementById("editMenu").style.display = "none";
+                    location.reload()
                 } else {
                     //Mostrando errores por pantalla
                     console.log(res, 'malo');
@@ -146,11 +146,12 @@ function addCheckoutUser(e) {
                 const res = JSON.parse(xhttpCheckOut.responseText);
                 console.log(res)
                 if (res == "ok") {
-                   alert(res)
+                    alert(res)
                 } else {
-                   
+
                 }
             }
         }
     }
 }
+

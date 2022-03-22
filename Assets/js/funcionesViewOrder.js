@@ -12,15 +12,14 @@ function getOrderView() {
                     <td>${order.address}</td>
                     <td>${order.phoneNo}</td>
                     <td>${order.amount} €</td>
-                    <td>${order.paymentMode}</td>
                     <td>${order.orderDate}</td>
-                    <td>
+                    <td >
                         <div id="orderStatusViews"  data-bs-toggle="modal" data-bs-target="#statusOrder">
                             ${order.orderStatus}
                         </div>
                     </td>
                     <td >
-                        <button type="button"  data-bs-toggle="modal" data-bs-target="#frmOrder" onclick="selecToRder(${order.orderId})" >${order.orderId}</button>
+                        <a class="button-views" data-bs-toggle="modal" data-bs-target="#frmOrder" onclick="selecToRder(${order.orderId})" ><i class="fa fa-eye" aria-hidden="true"></i></a>
                     </td>
                 `
             }
@@ -29,31 +28,31 @@ function getOrderView() {
             let status = document.querySelectorAll('#orderStatusViews');
             for (let statu of status) {
                 if (statu.innerHTML == 0) {
-                    statu.innerHTML = `<div class="alert alert-primary" role="alert">
-                                            Order Placed. 
+                    statu.innerHTML = `<div class="alert-status alert alert-primary" role="alert">
+                                            Pedido realizado.. 
                                         </div>`
                 } else if (statu.innerHTML == 1) {
-                    statu.innerHTML = `<div class="alert alert-primary" role="alert">
-                                            Order Confirmed. 
+                    statu.innerHTML = `<div class="alert-status alert alert-primary" role="alert">
+                                            Confirmado. 
                                         </div>`
                 } else if (statu.innerHTML == 2) {
-                    statu.innerHTML = `<div class="alert alert-primary" role="alert">
-                                            Preparing your Order. 
+                    statu.innerHTML = `<div class="alert-status alert alert-primary" role="alert">
+                                            Preparando. 
                                         </div>`
                 } else if (statu.innerHTML == 3) {
-                    statu.innerHTML = `<div class="alert alert-primary" role="alert">
-                                                Your order is on the way! 
+                    statu.innerHTML = `<div class="alert-status alert alert-primary" role="alert">
+                                                En camino 
                                         </div>`
                 } else if (statu.innerHTML == 4) {
-                    statu.innerHTML = `<div class="alert alert-primary" role="alert">
-                                             Order Delivered. 
+                    statu.innerHTML = `<div class="alert-status alert alert-primary" role="alert">
+                                             Delivery. 
                                         </div>`
                 } else if (statu.innerHTML == 5) {
-                    statu.innerHTML = `<div class="alert alert-primary" role="alert">
-                                            Order Denied. 
+                    statu.innerHTML = `<div class="alert-status alert alert-primary" role="alert">
+                                            Denegado. 
                                         </div>`
                 } else {
-                    statu.innerHTML = `<div class="alert alert-danger" role="alert">
+                    statu.innerHTML = `<div class="alert-status alert alert-danger" role="alert">
                                             Cancelado
                                         </div>`
                 }
@@ -103,3 +102,5 @@ function selecToRder(orderId) {
 function deleteOrderbutton() {
     document.getElementById("contenMenu").remove();
 }
+
+

@@ -54,15 +54,14 @@
                         <a class="dropdown-item" href="<?php echo base_url_user; ?>Login">Login</a>
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registerUser">
-                            Register
+                            Registrar
                         </button>
 
                     </div>
                 <?php } else { ?>
                     <ul class="navbar-nav mb-2 mb-lg-0">
-                        <a class="dropdown-item" href="<?php echo base_url_user; ?>Carrito">
-                            <i class="fas fa-shopping-cart"></i>
-                            <i id="navBarQuantityMenu" class="bi bi-cart"></i>
+                        <a id="navBarQuantityMenuCant" class="dropdown-item" href="<?php echo base_url_user; ?>Carrito">
+                            
                         </a>
                         <!-- Message -->
                         <div class="icon-badge-container d-flex align-items-center">
@@ -78,7 +77,7 @@
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li>
                                     <a class="dropdown-item" href="<?php echo base_url_user ?>ViewOrder">
-                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    <i class="fa fa-file-text" aria-hidden="true"></i></i>
                                         Pedidos
                                     </a>
                                 </li>

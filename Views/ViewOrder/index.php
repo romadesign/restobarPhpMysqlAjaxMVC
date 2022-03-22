@@ -5,7 +5,7 @@ include "Views/Templates/OrderItemModal.php";
 ?>
 
 <div class="container">
-    <div class="row">
+    <div class="row content">
         <div class="col-sm-6">
             <h2>Detalles del <b>pedido</b></h2>
         </div>
@@ -26,9 +26,8 @@ include "Views/Templates/OrderItemModal.php";
                     <th scope="col">Dirección</th>
                     <th scope="col">Celular</th>
                     <th scope="col">Monto</th>
-                    <th scope="col">Modo de pago</th>
                     <th scope="col">Fecha de pedido</th>
-                    <th scope="col">Estado</th>
+                    <th scope="col">Fecha</th>
                     <th scope="col">Items</th>
                 </tr>
             </thead>

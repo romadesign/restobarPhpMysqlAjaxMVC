@@ -1,3 +1,5 @@
+
+
 function selectMenuAddCart(menuId) {
     console.log(menuId)
 
@@ -15,7 +17,6 @@ function selectMenuAddCart(menuId) {
                 const res = JSON.parse(xhrSelectAddCarMenu.responseText);
                 document.getElementById("menuId").value = res.menuId
                 document.getElementById("menuName").value = res.menuName
-                // document.getElementById("menuPrice").value = res.menuPrice
             }
         }
     }
@@ -38,22 +39,33 @@ function addMenuAlCarrito(e) {
                 const res = JSON.parse(xhttpAddMenuAlCart.responseText);
                 console.log(res)
                 if (res == "ok") {
-                    console.log(res + ' Usuario agregado al carrito con exito');
                     const resHtmlBackend = document.getElementById("errorAddMenu");
                     resHtmlBackend.innerHTML = `<div class="alert alert-primary" role="alert">
                                             ${res}
                                       </div>`;
+                    location.reload();
                 } else {
                     const resHtmlBackend = document.getElementById("errorAddMenu");
                     resHtmlBackend.innerHTML = `<div class="alert alert-info" role="alert">
                                             ${res}
                                       </div>`;
                     document.getElementById("optionsAddCart").style.display = "none";
-                    console.log('ITEM YA INGRESADO AL CARRITO');
+                    document.getElementById("errorAddMenu").style.display = "block";
+                    location.reload();
+
                 }
+                document.getElementById("itemQuantity").value = ""
+
             }
         }
     }
 }
 
+function closeButton() {
+    document.getElementById("menuId").value = ""
+    document.getElementById("itemQuantity").value = ""
+    document.getElementById("optionsAddCart").style.display = "block";
+    document.getElementById("errorAddMenu").style.display = "none";
+
+}
 

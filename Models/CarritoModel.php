@@ -157,5 +157,12 @@ class CarritoModel extends Query
         }
         return $res;
     }
+
+    public function getMenu()
+    {
+        $sql = "SELECT * FROM `viewcart` WHERE userId = $_SESSION[id]";
+        $data = $this->SelectAll($sql);
+        return $data;
+    }
 }
 
