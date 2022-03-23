@@ -14,11 +14,21 @@ class Navbar extends Controller
         $this->views->getView($this, "index");
     }
 
-    //Get listar menus por usuarios
-    public function ListarNav()
+    //Get Total de items
+    public function CantidadItems()
     {
         $userId = $_SESSION['id'];
-        $data = $this->model->getCategorieNavbar($userId);
+        $data = $this->model->getCantidadItems($userId);
+
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
+    //Get Message
+    public function getMessage()
+    {
+        $userId = $_SESSION['id'];
+        $data = $this->model->getMessageNav($userId);
 
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
         die();

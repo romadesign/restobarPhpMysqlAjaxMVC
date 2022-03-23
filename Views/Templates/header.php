@@ -61,15 +61,16 @@
                 <?php } else { ?>
                     <ul class="navbar-nav mb-2 mb-lg-0">
                         <a id="navBarQuantityMenuCant" class="dropdown-item" href="<?php echo base_url_user; ?>Carrito">
-                            
+
                         </a>
                         <!-- Message -->
                         <div class="icon-badge-container d-flex align-items-center">
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#adminReply">
-                                <i class="far fa-envelope icon-badge-icon"></i>
-                                <div class="icon-badge "><span id="totalMessage" class="fst-italic">0</span>
+                            <a id="totalMessage" class="d-flex justify-content-center align-items-center dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#adminReply">
+                                    
+                                    
                             </a>
                         </div>
+                        
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <?php echo $_SESSION['username'] ?>
@@ -77,7 +78,7 @@
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li>
                                     <a class="dropdown-item" href="<?php echo base_url_user ?>ViewOrder">
-                                    <i class="fa fa-file-text" aria-hidden="true"></i></i>
+                                        <i class="fa fa-file-text" aria-hidden="true"></i></i>
                                         Pedidos
                                     </a>
                                 </li>
