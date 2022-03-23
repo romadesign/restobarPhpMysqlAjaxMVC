@@ -3,10 +3,15 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Realizar pedido</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                <div id="alert-checkout">
+                    <div class="alert alert-primary" role="alert">
+                        Gracias por realizar un pedido.
+                    </div>
+                </div>
                 <form method="POST" id="checkout">
                     <div class="form-group">
                         <b><label for="address">Dirección:</label></b>
@@ -16,7 +21,7 @@
                         <b><label for="address1">Alguna referencia:</label></b>
                         <input class="form-control" id="address1" name="address1" placeholder="Estamós cerca al .." type="text">
                     </div>
-                    <div class="form-row">
+                    <div class="form-row d-flex">
                         <div class="form-group col-md-6 mb-0">
                             <b><label for="phone">Celular:</label></b>
                             <div class="input-group mb-3">
@@ -32,7 +37,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <input type="number" id="amount" name="amount" >
+                        <input type="number" id="amount" name="amount">
                         <button type="submit" name="checkout" class="btn btn-success" onclick="addCheckoutUser(event)">Enviar datos</button>
                     </div>
                 </form>

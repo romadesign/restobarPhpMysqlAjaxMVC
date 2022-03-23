@@ -129,6 +129,10 @@ function deleteMenuId(menuId) {
     }
 }
 
+
+//Checkout
+document.getElementById("alert-checkout").style.display = "none";
+
 function addCheckoutUser(e) {
     e.preventDefault();
 
@@ -145,8 +149,10 @@ function addCheckoutUser(e) {
             if (status === 0 || (status >= 200 && status < 400)) {
                 const res = JSON.parse(xhttpCheckOut.responseText);
                 console.log(res)
-                if (res == "ok") {
-                    alert(res)
+                if (res == "eliminado") {
+                    document.getElementById("checkout").style.display = "none";
+                    document.getElementById("alert-checkout").style.display = "block";
+                    window.location.reload()
                 } else {
 
                 }

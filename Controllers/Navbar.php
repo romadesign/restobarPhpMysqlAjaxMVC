@@ -33,4 +33,19 @@ class Navbar extends Controller
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
         die();
     }
+
+     //Delete message id
+     public function eliminarMensajeId($id)
+     {
+         //Mira si muesta el item seleccionado
+         //print_r($menuId);
+         $data = $this->model->deleteMessageId($id);
+         if ($data == "eliminado") {
+             $msg = "ok";
+         } else {
+             $msg = "Error al elimiar la categoria";
+         }
+         echo json_encode($msg, JSON_UNESCAPED_UNICODE);
+         die();
+     }
 }

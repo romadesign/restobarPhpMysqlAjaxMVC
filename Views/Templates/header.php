@@ -65,7 +65,7 @@
                         </a>
                         <!-- Message -->
                         <div class="icon-badge-container d-flex align-items-center">
-                            <a id="totalMessage" class="d-flex justify-content-center align-items-center dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#adminReply">
+                            <a id="totalMessage" class="d-flex justify-content-center align-items-center dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalMessage">
                                     
                                     
                             </a>
@@ -99,3 +99,19 @@
             </div>
         </div>
     </nav>
+
+
+
+    <!-- Modal Message -->
+<div class="modal fade" id="modalMessage" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Mensaje</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div id="dataMessage" class="modal-body">
+      </div>
+    </div>
+  </div>
+</div>

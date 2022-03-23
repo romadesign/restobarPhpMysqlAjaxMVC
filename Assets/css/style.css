@@ -91,7 +91,7 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light {
 
 ul.dropdown-menu.show {
     background: #f8f9fa;
-    margin-left: -2rem;
+    margin-left: -3rem;
     border: 0;
 }
 
@@ -149,3 +149,30 @@ button.button-editItem {
 .far.fa-envelope {
   font-size: 1.3rem;
 }
+
+.contentAddMessage{
+    display: flex !important;
+    background: #eaeaea;
+    border-radius: 1rem;
+    margin-top: 0.7rem;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.text-message {
+    font-size: 0.9rem;
+    margin: 0rem 1rem 1rem 1rem;
+}
+
+h6 {
+    margin-top: 1rem !important;
+    margin-left: 1rem !important;
+    font-size: 0.7rem !important;
+}
+
+.icon-delete-message {
+    margin-top: 1rem;
+    margin-right: 1rem;
+    color: red;
+    cursor: pointer;
+  }

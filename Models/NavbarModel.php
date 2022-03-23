@@ -23,6 +23,19 @@ class NavbarModel extends Query
         $data = $this->SelectAll($sql);
         return $data;
     }
-
+    
+    //Eliminar los mensajes del usuario
+    public function deleteMessageId(int $id){
+        $this->id = $id;
+        $sql = "DELETE FROM contactreply WHERE id = ?";
+        $datos = array($this->id);
+        $data = $this->save($sql, $datos);
+        if($data == 1 ){
+            $res = "eliminado";
+        }else{
+            $res = "error";
+        }
+        return $res;
+    }
 }
 
