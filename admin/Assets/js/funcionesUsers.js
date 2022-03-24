@@ -68,6 +68,9 @@ function userRegister(e) {
                     const res = JSON.parse(xhrRegisterUser.responseText);
                     if (res == "si") {
                         console.log(res + ' Usuario registrado con exito');
+                        document.getElementById("modalCreateUser").style.display = "none";
+                    getUsers();
+
                     } else {
                         //Mostrando errores por pantalla
                         console.log(res, 'malo');
@@ -75,8 +78,10 @@ function userRegister(e) {
                 }
             }
         }
+
     }
 }
+
 
 function modificarUsuario(e) {
     e.preventDefault();

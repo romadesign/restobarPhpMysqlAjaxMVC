@@ -11,13 +11,13 @@
             <div id="optionsAddCart" class="modal-body">
                 <h4>Quieres agregar este menú a tu carrito?</h4>
                 <input type="text" class="form-control" id="menuName" name="menuName">
-                <form method="POST" id="frmAddCartMenu">
+                <form method="POST" id="frmAddCartMenu" name="frmAddCartMenu">
                     <div class="form-group">
                         <input type="hidden" id="menuId" name="menuId">
                         <input type="number" id="itemQuantity" name="itemQuantity">
                     </div>
                     <div class="form-group d-flex ">
-                    <button type="button" class="btn btn-success w-100" onclick="addMenuAlCarrito(event)">Agregar</button>
+                    <button type="submit" class="btn btn-success w-100" onclick="addMenuAlCarrito(event)">Agregar</button>
                     <button type="button" class="btn btn-danger w-100" data-bs-dismiss="modal">Cancelar</button>
                     </div>
                 </form>

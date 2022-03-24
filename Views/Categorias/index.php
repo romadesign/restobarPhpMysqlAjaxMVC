@@ -23,5 +23,4 @@
 
 </div>
 
-
 <?php include "Views/Templates/footer.php" ?>

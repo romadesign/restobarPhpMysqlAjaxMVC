@@ -4,7 +4,7 @@
     <h1 class="h3 mb-0 text-gray-800">Usuarios</h1>
 </div>
 
-<button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#exampleModal">Nuevo</button>
+<button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modalCreateUser">Nuevo</button>
 <table class="table" id="tblUsuarios">
     <thead class="thead-dark">
         <tr>
@@ -23,7 +23,7 @@
 
 
 <!-- Modal Register User -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalCreateUser" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -79,6 +79,7 @@
         </div>
     </div>
 </div>
+
 
 <!-- Modal  Edit User -->
 <div class="modal fade" id="editUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
