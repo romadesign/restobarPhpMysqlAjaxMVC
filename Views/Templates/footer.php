@@ -15,7 +15,7 @@ const base_url_user = "<?php echo base_url_user; ?>"
 <!-- <script src="<?php echo base_url_user; ?>Assets/js/funtionNav.js"></script> -->
 <!-- <script src="<?php echo base_url_user; ?>Assets/js/funcionesIndexCategorias.js"></script> -->
 <!-- <script src="<?php echo base_url_user; ?>Assets/js/funcionesCarrito.js"></script> -->
-<script src="<?php echo base_url_user; ?>Assets/js/funcionesViewOrder.js"></script>
+<!-- <script src="<?php echo base_url_user; ?>Assets/js/funcionesViewOrder.js"></script> -->
 <script src="<?php echo base_url_user; ?>Assets/js/login.js"></script> 
 
 </body>

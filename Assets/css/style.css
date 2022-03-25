@@ -176,3 +176,7 @@ h6 {
     color: red;
     cursor: pointer;
   }
+
+  .button-add-menu{
+      margin-left: 1rem;
+  }

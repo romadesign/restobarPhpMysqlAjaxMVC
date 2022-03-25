@@ -3,22 +3,19 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel"></h5>
-                <button id="closeAddQuantityButton" onclick = "closeButton()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" id="staticBackdropLabel">Quieres agregar este menú a tu carrito?</h5>
+                <button id="closeAddQuantityButton" onclick="closeButton()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div id="errorAddMenu">
             </div>
             <div id="optionsAddCart" class="modal-body">
-                <h4>Quieres agregar este menú a tu carrito?</h4>
-                <input type="text" class="form-control" id="menuName" name="menuName">
+                <div id="tittle-menu-modal">
+                </div>
                 <form method="POST" id="frmAddCartMenu" name="frmAddCartMenu">
-                    <div class="form-group">
-                        <input type="hidden" id="menuId" name="menuId">
-                        <input type="number" id="itemQuantity" name="itemQuantity">
-                    </div>
                     <div class="form-group d-flex ">
-                    <button type="submit" class="btn btn-success w-100" onclick="addMenuAlCarrito(event)">Agregar</button>
-                    <button type="button" class="btn btn-danger w-100" data-bs-dismiss="modal">Cancelar</button>
+                        <input type="hidden" id="menuId" name="menuId">
+                        <input type="number" id="itemQuantity" name="itemQuantity" class="w-100">
+                        <button type="submit" class="button-add-menu btn btn-success w-100" onclick="addMenuAlCarrito(event)">Agregar</button>
                     </div>
                 </form>
             </div>
