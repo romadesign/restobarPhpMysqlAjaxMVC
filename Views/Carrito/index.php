@@ -84,11 +84,11 @@ if (isset($_SESSION['username'])) { ?>
                     </div>
                 </div>
                 <div id="content-edit-quantity" class="modal-body">
-                    <form method="POST" id="frmCarritoUser">
+                    <form method="POST" id="frmCarritoUser" name="frmCarritoUser">
                         <div class="form-group d-flex">
                             <input type="hidden" id="menuId" name="menuId">
                             <input type="number" class="form-control" id="edititemQuantity" name="edititemQuantity" Placeholder="Price:" required min="1">
-                            <button type="submit" class="btn btn-sm btn-primary"> Editar </button>
+                            <button type="submit" class="btn btn-sm btn-primary" onclick="editQuantity(event)"> Editar </button>
                         </div>
                     </form>
                 </div>

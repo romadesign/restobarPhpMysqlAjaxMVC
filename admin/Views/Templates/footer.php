@@ -35,18 +35,11 @@
 
 <!-- Custom scripts for all pages-->
 <script src="<?php echo base_url; ?>/Assets/js/sb-admin-2.min.js"></script>
-
-<!-- Page level plugins -->
-<!-- <script src="<?php echo base_url; ?>/Assets/vendor/chart.js/Chart.min.js"></script> -->
-
-<!-- Page level custom scripts -->
-<!-- <script src="<?php echo base_url; ?>/Assets/js/demo/chart-area-demo.js"></script> -->
-<!-- <script src="<?php echo base_url; ?>/Assets/js/demo/chart-pie-demo.js"></script> -->
-
 <script>
 const base_url = "<?php echo base_url ?>";
 </script>
-<script src="<?php echo base_url; ?>/Assets/js/funcionesUsers.js"></script>
+<script src="<?php echo base_url; ?>/Assets/js/function.js"></script>
+<!-- <script src="<?php echo base_url; ?>/Assets/js/funcionesUsers.js"></script> -->
 <script src="<?php echo base_url; ?>/Assets/js/funcionesCategorias.js"></script>
 <script src="<?php echo base_url; ?>/Assets/js/funcionesMenu.js"></script>
 

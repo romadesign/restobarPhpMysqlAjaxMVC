@@ -1,6 +1,5 @@
 
 ////////////////////////////////////////////////Function Navbar//////////////////////////////////////////
-
 getMenuPorUsuariosCantidad()
 async function getMenuPorUsuariosCantidad() {
     document.getElementById("navBarQuantityMenuCant").innerHTML = "";
@@ -13,7 +12,7 @@ async function getMenuPorUsuariosCantidad() {
                 <i  class="bi bi-cart">${cantidad.c} Items</i>
             `;
     })
-   
+
 }
 
 amountMessage()
@@ -45,7 +44,7 @@ async function getMessage() {
         </div>
         `
     })
-   
+
 }
 
 async function deleteMessageId(id) {
@@ -59,61 +58,44 @@ async function deleteMessageId(id) {
         //Mostrando errodata por pantalla
         console.log(data, 'malo');
     }
-   
+
 }
 ////////////////////////////////////////////////Function Navbar//////////////////////////////////////////
 
 ////////////////////////////////////////////////Function menuCategorie//////////////////////////////////////////
-function selectMenuAddCart(menuId) {
+// selectMenuAddCart()
+async function selectMenuAddCart(menuId) {
     document.getElementById("tittle-menu-modal").innerHTML = "";
-    var url = `${base_url_user}Categorias/selectMenuIdAddCart/${menuId}`;
-    frm = document.getElementById("frmAddCartMenu");
-    var formData = new FormData(frm);
-    formData.append('menuId', menuId);
-    fetch(url, {
-        method: "POST",
-        body: formData
-    })
-        .then(data => data.json())
-        .then(data => {
-            console.log(data)
-            document.getElementById("menuId").value = data.menuId
-            document.getElementById("tittle-menu-modal").innerHTML += `
+    const response = await fetch(`${base_url_user}Categorias/selectMenuIdAddCart/${menuId}`);
+    const data = await response.json();
+    console.log(data)
+    document.getElementById("menuId").value = data.menuId
+    document.getElementById("tittle-menu-modal").innerHTML += `
             <h4 scope="row"> ${data.menuName} </h4>
         `;
-        })
-        .catch(function (error) {
-            console.log("mal", error)
-        })
     document.getElementById("optionsAddCart").style.display = "block";
     document.getElementById("errorAddMenu").style.display = "none";
     document.getElementById("itemQuantity").value = ""
+
 }
 
-function addMenuAlCarrito(e) {
-
-    e.preventDefault();
-    const datos = new FormData(document.getElementById('frmAddCartMenu'));
-    var url = `${base_url_user}Categorias/ingresarMenuAlCarrito`;
-    fetch(url, {
+async function addMenuAlCarrito(e) {
+    e.preventDefault()
+    const response = await fetch(`${base_url_user}Categorias/ingresarMenuAlCarrito`, {
         method: 'POST',
-        body: datos
-    })
-        .then(data => data.json())
-        .then(data => {
-            const resHtmlBackend = document.getElementById("errorAddMenu");
-            resHtmlBackend.innerHTML = `<div class="alert alert-primary" role="alert">
+        body: new URLSearchParams(new FormData(frmAddCartMenu))
+    });
+    const data = await response.json();
+    console.log(data)
+    const resHtmlBackend = document.getElementById("errorAddMenu");
+    resHtmlBackend.innerHTML = `<div class="alert alert-primary" role="alert">
                                             ${data}
                                       </div>`;
-            document.getElementById("optionsAddCart").style.display = "none";
-            document.getElementById("errorAddMenu").style.display = "block";
+    document.getElementById("optionsAddCart").style.display = "none";
+    document.getElementById("errorAddMenu").style.display = "block";
 
-            getMenuPorUsuariosCantidad()
-            console.log("se recivio", data)
-        })
-        .catch(function (error) {
-            console.log("norecivio", error)
-        })
+    getMenuPorUsuariosCantidad()
+    console.log("se recivio", data)
 
 }
 
@@ -152,27 +134,27 @@ async function getOrderView() {
     for (let statu of status) {
         if (statu.innerHTML == 0) {
             statu.innerHTML = `<div class="alert-status alert alert-primary" role="alert">
-                                            Pedido realizado.. 
+                                            Pedido realizado..
                                         </div>`
         } else if (statu.innerHTML == 1) {
             statu.innerHTML = `<div class="alert-status alert alert-primary" role="alert">
-                                            Confirmado. 
+                                            Confirmado.
                                         </div>`
         } else if (statu.innerHTML == 2) {
             statu.innerHTML = `<div class="alert-status alert alert-primary" role="alert">
-                                            Preparando. 
+                                            Preparando.
                                         </div>`
         } else if (statu.innerHTML == 3) {
             statu.innerHTML = `<div class="alert-status alert alert-primary" role="alert">
-                                                En camino 
+                                                En camino
                                         </div>`
         } else if (statu.innerHTML == 4) {
             statu.innerHTML = `<div class="alert-status alert alert-primary" role="alert">
-                                             Delivery. 
+                                             Delivery.
                                         </div>`
         } else if (statu.innerHTML == 5) {
             statu.innerHTML = `<div class="alert-status alert alert-primary" role="alert">
-                                            Denegado. 
+                                            Denegado.
                                         </div>`
         } else {
             statu.innerHTML = `<div class="alert-status alert alert-danger" role="alert">
@@ -183,60 +165,41 @@ async function getOrderView() {
 }
 
 
-
-function selecToRder(orderId) {
+async function selecToRder(orderId) {
     document.getElementById("contenMenu").innerHTML = "";
-    var url = `${base_url_user}ViewOrder/selectItemsOrders/${orderId}`;
-    frm = document.getElementById("frmOrderItemsViews");
-    var formData = new FormData(frm);
-    formData.append('orderId', orderId);
-    fetch(url, {
-        method: "POST",
-        body: formData
+    const response = await fetch(`${base_url_user}ViewOrder/selectItemsOrders/${orderId}`);
+    const data = await response.json();
+    console.log(data)
+    data.forEach(menu => {
+        console.log(menu)
+        document.getElementById("contenMenu").innerHTML += `
+                <tr>
+                    <th scope="row">${menu.menuId}</th>
+                    <td>${menu.menuName}</td>
+                    <td>${menu.itemQuantity}</td>
+                </tr>
+            `;
     })
-        .then(data => data.json())
-        .then(data => {
-            console.log(data)
-            for (let menu of data) {
-                let contentMenu = document.getElementById("contenMenu");
-                contentMenu.innerHTML += `
-                    <tr>
-                        <th scope="row">${menu.menuId}</th>
-                        <td>${menu.menuName}</td>
-                        <td>${menu.itemQuantity}</td>
-                    </tr>
-                `
-            }
-        })
-        .catch(function (error) {
-            console.log("mal", error)
-        })
+
 }
 ////////////////////////////////////////////////Function vieworder//////////////////////////////////////////////////////
 
 
 ////////////////////////////////////////////////Function Cart//////////////////////////////////////////
 document.getElementById("alert-modal-edit-quantity").style.display = "none";
-const frmCarritoUser = document.querySelector("#frmCarritoUser");
-frmCarritoUser.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const datos = new FormData(document.getElementById('frmCarritoUser'));
-    var itemQuantity = datos.get("edititemQuantity")
-    var url = `${base_url_user}Carrito/editCantidad`;
-    fetch(url, {
+async function editQuantity(e) {
+    e.preventDefault()
+    const response = await fetch(`${base_url_user}Carrito/editCantidad`, {
         method: 'POST',
-        body: datos
-    })
-        .then(data => data.json())
-        .then(data => {
-            document.getElementById("alert-modal-edit-quantity").style.display = "block"
-            document.getElementById("content-edit-quantity").style.display = "none"
-            mostrarItemsCart()
-        })
-        .catch(function (error) {
-            console.log("se recivio", error)
-        })
-})
+        body: new URLSearchParams(new FormData(frmCarritoUser))
+    });
+    const data = await response.json();
+    console.log(data)
+    document.getElementById("alert-modal-edit-quantity").style.display = "block"
+    document.getElementById("content-edit-quantity").style.display = "none"
+    mostrarItemsCart()
+
+}
 
 mostrarItemsCart()
 async function mostrarItemsCart() {
@@ -264,95 +227,67 @@ async function mostrarItemsCart() {
         </tr>
     `;
 
-    //Mostrando el precio total sumanando por datos de cada fila (ID)
-    let preciosSpan = document.querySelectorAll('#priceTotsal');
-    let total = 0;
+        //Mostrando el precio total sumanando por datos de cada fila (ID)
+        let preciosSpan = document.querySelectorAll('#priceTotsal');
+        let total = 0;
 
-    preciosSpan.forEach(function (element) {
-        let value = element.innerHTML;
-        //eliminamos todo lo que no sea numero
-        value = parseFloat(value.replace(/(?!-)[^0-9.]/g, ''))
-        total += value
+        preciosSpan.forEach(function (element) {
+            let value = element.innerHTML;
+            //eliminamos todo lo que no sea numero
+            value = parseFloat(value.replace(/(?!-)[^0-9.]/g, ''))
+            total += value
+        })
+        document.getElementById('total').innerHTML = `${total}€`
+        document.getElementById('totalfinal').innerHTML = `${total}€`
+        document.getElementById('amount').value = total
     })
-    document.getElementById('total').innerHTML = `${total}€`
-    document.getElementById('totalfinal').innerHTML = `${total}€`
-    document.getElementById('amount').value = total
-    })
-   
+
 }
 
-
-const selectMenuIdCant = (menuId) => {
+async function selectMenuIdCant(menuId) {
     document.getElementById("alert-modal-edit-quantity").style.display = "none"
     document.getElementById("content-edit-quantity").style.display = "block"
-    var url = `${base_url_user}Carrito/selectMenuIdCantidad/${menuId}`;
-    frm = document.getElementById("frmCarritoUser");
 
-    var formData = new FormData(frm);
-    formData.append('menuId', menuId);
-    fetch(url, {
-        method: "POST",
-        body: formData
-    })
-        .then(data => data.json())
-        .then(data => {
-            console.log(data)
-            document.getElementById("menuId").value = data.menuId;
-            document.getElementById("edititemQuantity").value = data.itemQuantity;
+    const response = await fetch(`${base_url_user}Carrito/selectMenuIdCantidad/${menuId}`);
+    const data = await response.json();
+    console.log(data)
+    document.getElementById("menuId").value = data.menuId;
+    document.getElementById("edititemQuantity").value = data.itemQuantity;
 
-
-        })
-        .catch(function (error) {
-            console.log("mal", error)
-        })
 }
 
 
-const deleteMenuId = (menuId) => {
-    console.log(menuId)
-    var url = `${base_url_user}Carrito/eliminarMenuId/${menuId}`;
-
-    fetch(url, {
-        method: "DELETE"
-    })
-        .then(data => data.json())
-        .then(data => {
-            console.log("bien", data)
-            mostrarItemsCart()
-            getMenuPorUsuariosCantidad();
-        })
-        .catch(function (error) {
-            console.log("mal", error)
-        })
-}
-
-//Checkout
-document.getElementById("alert-checkout").style.display = "none";
-function addCheckoutUser(e) {
-    e.preventDefault();
-
-    const xhttpCheckOut = new XMLHttpRequest(),
-        method = "POST",
-        url = base_url_user + 'Carrito/realiandoOrder',
-        frm = document.getElementById("checkout");
-
-    xhttpCheckOut.open(method, url, true);
-    xhttpCheckOut.send(new FormData(frm));
-    xhttpCheckOut.onreadystatechange = function () {
-        if (xhttpCheckOut.readyState === XMLHttpRequest.DONE) {
-            var status = xhttpCheckOut.status;
-            if (status === 0 || (status >= 200 && status < 400)) {
-                const res = JSON.parse(xhttpCheckOut.responseText);
-                console.log(res)
-                if (res == "eliminado") {
-                    document.getElementById("checkout").style.display = "none";
-                    document.getElementById("alert-checkout").style.display = "block";
-                    window.location.reload()
-                } else {
-
-                }
-            }
-        }
+async function deleteMenuId(menuId) {
+    const response = await fetch(`${base_url_user}Carrito/eliminarMenuId/${menuId}`);
+    const data = await response.json();
+    if (data == "ok") {
+        console.log(data + ' Mensaje menu eliminado');
+        mostrarItemsCart()
+        getMenuPorUsuariosCantidad();
+    } else {
+        //Mostrando errodata por pantalla
+        console.log(data, 'malo');
     }
+
 }
+
+document.getElementById("alert-checkout").style.display = "none";
+async function addCheckoutUser(e) {
+    e.preventDefault()
+    const response = await fetch(`${base_url_user}Carrito/realiandoOrder`, {
+        method: 'POST',
+        body: new URLSearchParams(new FormData(checkout))
+    });
+    const data = await response.json();
+    console.log(data)
+    if (data == "eliminado") {
+        document.getElementById("checkout").style.display = "none";
+        document.getElementById("alert-checkout").style.display = "block";
+        window.location.reload()
+    } else {
+
+    }
+
+}
+
 ////////////////////////////////////////////////Function Cart//////////////////////////////////////////

@@ -12,7 +12,7 @@
                         Gracias por realizar un pedido.
                     </div>
                 </div>
-                <form method="POST" id="checkout">
+                <form method="POST" id="checkout" name="checkout">
                     <div class="form-group">
                         <b><label for="address">Dirección:</label></b>
                         <input class="form-control" id="address" name="address" placeholder="Calle .." type="text" required minlength="3" maxlength="500">
@@ -38,7 +38,7 @@
                     </div>
                     <div class="modal-footer">
                         <input type="number" id="amount" name="amount">
-                        <button type="submit" name="checkout" class="btn btn-success" onclick="addCheckoutUser(event)">Enviar datos</button>
+                        <button type="submit" class="btn btn-success" onclick="addCheckoutUser(event)">Enviar datos</button>
                     </div>
                 </form>
             </div>
