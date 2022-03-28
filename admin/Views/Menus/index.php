@@ -4,7 +4,6 @@
     <h1 class="h3 mb-0 text-gray-800">Menus</h1>
 </div>
 <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#createMenuModal">Nuevo</button>
-<?php print_r($categories) ?>
 <table class="table" id="tblUsuarios">
     <thead class="thead-dark">
         <tr>

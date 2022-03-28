@@ -40,8 +40,8 @@ const base_url = "<?php echo base_url ?>";
 </script>
 <script src="<?php echo base_url; ?>/Assets/js/function.js"></script>
 <!-- <script src="<?php echo base_url; ?>/Assets/js/funcionesUsers.js"></script> -->
-<script src="<?php echo base_url; ?>/Assets/js/funcionesCategorias.js"></script>
-<script src="<?php echo base_url; ?>/Assets/js/funcionesMenu.js"></script>
+<!-- <script src="<?php echo base_url; ?>/Assets/js/funcionesCategorias.js"></script> -->
+<!-- <script src="<?php echo base_url; ?>/Assets/js/funcionesMenu.js"></script> -->
 
 </body>
 

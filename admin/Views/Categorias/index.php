@@ -32,7 +32,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST" id="frmCategoria">
+                <form enctype="multipart/form-data"  method="POST" id="frmCategoria" name="frmCategoria">
                     <div class="form-group">
                         <input class="form-control" id="categorieName" name="categorieName" placeholder="Elija un titulo para la categoria" type="text" required minlength="3" maxlength="11">
                     </div>
