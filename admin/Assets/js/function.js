@@ -280,3 +280,129 @@ async function deleteMenuId(menuId) {
     }
 
 }
+
+
+
+getOrders()
+async function getOrders() {
+    const response = await fetch(`${base_url}OrderManager/Listar`);
+    const data = await response.json();
+    data.forEach(order => {
+        document.getElementById("dataPedidos").innerHTML += `
+        <tr>
+        <th scope="row">${order.orderId}</th>
+        <td>${order.userId}</td>
+        <td>${order.address}</td>
+        <td>${order.phoneNo}</td>
+        <td>${order.amount} €</td>
+        <td id="typePayment">${order.paymentMode}</td>
+        <td>${order.orderDate}</td>
+        <td>
+            <div onclick="selectStatus(${order.orderId})" id="orderStatusViews" type="button" class="btn-sm" data-toggle="modal" data-target="#modalStatus" >${order.orderStatus}</div>
+        </td>
+        <td>
+           items
+        </td>
+    </tr>
+    `
+    })
+    //Validar estado del pedido 
+    let status = document.querySelectorAll('#orderStatusViews');
+    for (let statu of status) {
+        if (statu.innerHTML == 0) {
+            statu.innerHTML = `<div class="alert-status alert alert-primary" role="alert">
+                                            Pedido realizado..
+                                        </div>`
+        } else if (statu.innerHTML == 1) {
+            statu.innerHTML = `<div class="alert-status alert alert-primary" role="alert">
+                                            Confirmado.
+                                        </div>`
+        } else if (statu.innerHTML == 2) {
+            statu.innerHTML = `<div class="alert-status alert alert-primary" role="alert">
+                                        Pedido preparando.
+                                        </div>`
+        } else if (statu.innerHTML == 3) {
+            statu.innerHTML = `<div class="alert-status alert alert-primary" role="alert">
+                                            Pedido en camino
+                                        </div>`
+        } else if (statu.innerHTML == 4) {
+            statu.innerHTML = `<div class="alert-status alert alert-primary" role="alert">
+                                             Delivery.
+                                        </div>`
+        } else if (statu.innerHTML == 5) {
+            statu.innerHTML = `<div class="alert-status alert alert-primary" role="alert">
+                                            Pedido denegado.
+                                        </div>`
+        } else {
+            statu.innerHTML = `<div class="alert-status alert alert-danger" role="alert">
+                                            Pedido dancelado
+                                        </div>`
+        }
+    }
+    //Validar típo de pago
+    let payment = document.querySelectorAll('#typePayment');
+    for (let pay of payment) {
+        if (pay.innerHTML == 0) {
+            pay.innerHTML = `<div class="alert-status alert alert-primary" role="alert">
+                                            Pago en destino
+                                        </div>`
+        } else if (pay.innerHTML == 1) {
+            pay.innerHTML = `<div class="alert-status alert alert-primary" role="alert">
+                                Pago Online
+                            </div>`
+        }
+    }
+
+
+
+
+}
+
+async function selectStatus(orderId) {
+    document.getElementById("content-delivery").style.display = "none"
+    document.getElementById('orderStatus').innerHTML = "";
+    const response = await fetch(`${base_url}OrderManager/selectStatu/${orderId}`);
+    const data = await response.json();
+    let orderStatus = data.orderStatus;
+    console.log(data.orderId)
+    document.getElementById("orderId").value = data.orderId;
+    document.getElementById("orderIdDelivery").value = data.orderId;
+    document.getElementById("orderStatus").value = orderStatus
+
+    if (orderStatus > 0 && orderStatus < 5) {
+        document.getElementById("content-delivery").style.display = "block"
+    }
+}
+
+async function editStatusOrder(e) {
+    e.preventDefault()
+    const response = await fetch(`${base_url}OrderManager/modificarEstadoOrder`, {
+        method: 'POST',
+        body: new URLSearchParams(new FormData(frmStatus))
+    });
+    const data = await response.json();
+    if (data == "si") {
+        console.log(data + 'Estado editado');
+    } else {
+        //Mostrando errores por pantalla
+        console.log(data, 'malo');
+    }
+
+}
+
+async function createDeliveryName(e) {
+    let frmDelivery = document.getElementById('frmDelivery')
+    const response = await fetch(`${base_url}OrderManager/createDeliveryName`, {
+        method: 'POST',
+        body: new FormData(frmDelivery)
+    });
+    const data = await response.json();
+    console.log(data)
+    if (data == "si") {
+        console.log(data + ' Datos del repartidor');
+
+    } else {
+        //Mostrando errores por pantalla
+        console.log(data, 'malo');
+    }
+}

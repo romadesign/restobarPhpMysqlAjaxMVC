@@ -52,6 +52,7 @@
                         <a class="collapse-item" href="<?php echo base_url; ?>Usuarios">Usuarios</a>
                         <a class="collapse-item" href="<?php echo base_url; ?>Categorias">Categorias</a>
                         <a class="collapse-item" href="<?php echo base_url; ?>Menus">Menus</a>
+                        <a class="collapse-item" href="<?php echo base_url; ?>OrderManager">Pedidos</a>
                     </div>
                 </div>
             </li>
