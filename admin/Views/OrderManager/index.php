@@ -114,6 +114,33 @@
     </div>
 </div>
 
-
+<!-- ModalItems -->
+<div class="modal fade" id="modalOrderItems" tabindex="-1" aria-labelledby="idOrder" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="idOrder">Lista de items</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">MenuId</th>
+              <th scope="col">Menú</th>
+              <th scope="col">Cantidad</th>
+            </tr>
+          </thead>
+          <tbody id="contentItemsOrder">
+            
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
 
 <?php include "Views/Templates/footer.php" ?>

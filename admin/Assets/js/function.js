@@ -303,7 +303,8 @@ async function getOrders() {
             <div onclick="selectStatus(${order.orderId})" id="orderStatusViews" type="button" class="btn-sm" data-toggle="modal" data-target="#modalStatus" >${order.orderStatus}</div>
         </td>
         <td>
-           items
+            <div onclick="getOrderItem(${order.orderId})" id="orderItems" type="button" class="btn-sm" data-toggle="modal" data-target="#modalOrderItems" ><i class="fa fa-list" aria-hidden="true"></i>
+            </div>
         </td>
     </tr>
     `
@@ -460,7 +461,7 @@ async function editDeliveryDetails(e) {
 }
 
 
-async function createDeliveryName() {
+async function createDeliveryName(orderId) {
     //Dato el orderId esta siendo recibido desde la selectStatu()
     const response = await fetch(`${base_url}OrderManager/createDeliveryName`, {
         method: 'POST',
@@ -478,3 +479,20 @@ async function createDeliveryName() {
     }
 }
 
+async function getOrderItem(orderId){
+    document.getElementById("contentItemsOrder").innerHTML = ""
+    const response = await fetch(`${base_url}OrderManager/getOrdersItem/${orderId}`);
+    const data = await response.json();
+    console.log(data)
+    data.forEach(order => {
+        console.log(order)
+        document.getElementById("contentItemsOrder").innerHTML += `
+        <tr>
+            <th scope="row">${order.id}</th>
+            <td>${order.menuId}</td>
+            <td>${order.menuName}</td>
+            <td>${order.itemQuantity}</td>
+        </tr>
+    `
+    })
+}

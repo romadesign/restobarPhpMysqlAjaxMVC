@@ -94,5 +94,12 @@ class OrderManager extends Controller
         echo json_encode($msg, JSON_UNESCAPED_UNICODE);
         die();
     }
+
+    //Get ordersItems
+    public function getOrdersItem(int $orderId){
+        $data = $this->model->getOrdersItems($orderId);
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        die();
+    }
    
 }

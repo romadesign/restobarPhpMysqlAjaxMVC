@@ -112,4 +112,13 @@ class OrderManagerModel extends Query
         return $res;
     }
 
+    //Select items todo ordes
+    public function getOrdersItems(int $orderId){
+        $sql = "SELECT * FROM `orderitems` OT
+                INNER JOIN menu M ON M.menuId = OT.menuId
+                WHERE OT.orderId = $orderId";
+        $data = $this->SelectAll($sql);
+        return $data;
+    }
+
 }
