@@ -72,4 +72,44 @@ class OrderManagerModel extends Query
         }
         return $res;
     }
+
+    //select data delivery Details
+    public function selectDeliveryDetails(int $orderId)
+    {
+        $sql = "SELECT * FROM `deliverydetails` WHERE orderId = $orderId";
+        $data = $this->select($sql);
+        return $data;
+    }
+
+    //Modification delivery details
+    public function modifyDelivery(
+        int $orderId,
+        string $deliveryBoyName,
+        int $deliveryBoyPhoneNo,
+        int $deliveryTime,
+        int $id
+    ) {
+        $this->orderId = $orderId;
+        $this->deliveryBoyName = $deliveryBoyName;
+        $this->deliveryBoyPhoneNo = $deliveryBoyPhoneNo;
+        $this->deliveryTime = $deliveryTime;
+        $this->id = $id;
+        #update
+        $sql = "UPDATE `deliverydetails` SET  orderId=?, deliveryBoyName=?, deliveryBoyPhoneNo=?, deliveryTime=?  WHERE id =?";
+        $data = array(
+            $this->orderId,
+            $this->deliveryBoyName,
+            $this->deliveryBoyPhoneNo,
+            $this->deliveryTime,
+            $this->id,
+        );
+        $givens = $this->save($sql, $data);
+        if ($givens == 1) {
+            $res = "modificado";
+        } else {
+            $res = "error";
+        }
+        return $res;
+    }
+
 }

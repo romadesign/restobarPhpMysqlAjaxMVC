@@ -48,19 +48,51 @@ class OrderManager extends Controller
     //Create Delivery Boy Name
     public function createDeliveryName()
     {
-        //print_r($_POST);
         $orderId = $_POST["orderIdDelivery"];
         $name = $_POST["name"];
-        $time = $_POST["time"];
         $phone = $_POST["phone"];
-        $data = $this->model->createDeliveryBoy($orderId, $name, $time, $phone);
-        if ($data == "ok") {
+        $time = $_POST["time"];
+        // if ($trackId == NULL) {
+            $data = $this->model->createDeliveryBoy($orderId, $name, $phone, $time);
+            if ($data == "ok") {
+                $msg = "si";
+            } else {
+                $msg = "Error al crear una nueva categoria";
+            }
+
+        echo json_encode($msg, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
+
+    //Select deliveryDetails
+    public function selectDeliveryDetails(int $orderId)
+    {
+        //Verificamos si nos da e Id seleccionado en el botton
+        //  print_r($orderStatus);
+        $data = $this->model->selectDeliveryDetails($orderId);
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
+    //Update delivery details
+    public function editDeliveryDetails()
+    {
+        $orderId = $_POST["frmOrderId"];
+        $deliveryBoyName = $_POST["frmName"];
+        $deliveryBoyPhoneNo = $_POST["frmPhone"];
+        $deliveryTime = $_POST["frmTime"];
+        $id = $_POST["frmId"];
+
+        $data = $this->model->modifyDelivery( $orderId, $deliveryBoyName, $deliveryBoyPhoneNo,$deliveryTime, $id);
+        if ($data == "modificado") {
             $msg = "si";
         } else {
-            $msg = "Error al crear una nueva categoria";
+            $msg = "Error al editar el usuario";
         }
 
         echo json_encode($msg, JSON_UNESCAPED_UNICODE);
         die();
     }
+   
 }

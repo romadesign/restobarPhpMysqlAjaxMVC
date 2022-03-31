@@ -285,9 +285,11 @@ async function deleteMenuId(menuId) {
 
 getOrders()
 async function getOrders() {
+    document.getElementById("dataPedidos").innerHTML = "";
     const response = await fetch(`${base_url}OrderManager/Listar`);
     const data = await response.json();
     data.forEach(order => {
+
         document.getElementById("dataPedidos").innerHTML += `
         <tr>
         <th scope="row">${order.orderId}</th>
@@ -352,30 +354,51 @@ async function getOrders() {
                             </div>`
         }
     }
-
-
-
-
 }
 
 async function selectStatus(orderId) {
-    document.getElementById("content-delivery").style.display = "none"
-    document.getElementById('orderStatus').innerHTML = "";
+    document.getElementById("content-modal-delivery").style.display = "block"
+    document.querySelector(".alert-delivery").innerHTML = ""
+    document.getElementById("orderStatus").value = ""
     const response = await fetch(`${base_url}OrderManager/selectStatu/${orderId}`);
     const data = await response.json();
     let orderStatus = data.orderStatus;
     console.log(data.orderId)
+    console.log(orderStatus)
     document.getElementById("orderId").value = data.orderId;
-    document.getElementById("orderIdDelivery").value = data.orderId;
     document.getElementById("orderStatus").value = orderStatus
 
-    if (orderStatus > 0 && orderStatus < 5) {
-        document.getElementById("content-delivery").style.display = "block"
+    //pasando el orderId de la tabla Orders para poder crear los datos del repartidor
+    document.getElementById("orderIdDelivery").value = data.orderId;
+
+    //Utilizando esta función para capturar el orderId y traer datos del repartidor
+    selectDeliveryDetails(orderId)
+
+    if (document.getElementById("orderStatus").value == 0) {
+        document.getElementById("frmDetails").style.display = "none"
+        document.getElementById("frmdelivery").style.display = "none"
+        document.querySelector(".options-status").style.display = "block"
+    } else {
+        document.querySelector(".options-status").style.display = "none"
+
+        if (orderStatus >= 1 && orderStatus <= 5) {
+            
+            document.getElementById("frmDetails").style.display = "block"
+            document.getElementById("frmStatus").style.display = "block"
+            document.getElementById("frmdelivery").style.display = "none"
+        } else {
+            document.getElementById("frmDetails").style.display = "none"
+            document.getElementById("frmdelivery").style.display = "block"
+        }
     }
+
+
 }
+
 
 async function editStatusOrder(e) {
     e.preventDefault()
+
     const response = await fetch(`${base_url}OrderManager/modificarEstadoOrder`, {
         method: 'POST',
         body: new URLSearchParams(new FormData(frmStatus))
@@ -383,6 +406,12 @@ async function editStatusOrder(e) {
     const data = await response.json();
     if (data == "si") {
         console.log(data + 'Estado editado');
+        document.getElementById("content-modal-delivery").style.display = "none"
+        document.querySelector(".alert-delivery").innerHTML += `
+                <div class="alert alert-primary" role="alert">
+                El estado del pedido fue actualizado
+            </div>`;
+        getOrders()
     } else {
         //Mostrando errores por pantalla
         console.log(data, 'malo');
@@ -390,11 +419,53 @@ async function editStatusOrder(e) {
 
 }
 
-async function createDeliveryName(e) {
-    let frmDelivery = document.getElementById('frmDelivery')
+async function selectDeliveryDetails(orderId) {
+    const response = await fetch(`${base_url}OrderManager/selectDeliveryDetails/${orderId}`);
+    const data = await response.json();
+    console.log(data + "acaa")
+    createDeliveryName(orderId)
+    document.getElementById("frmId").value = data.id;
+    document.getElementById("frmOrderId").value = data.orderId;
+    document.getElementById("frmName").value = data.deliveryBoyName;
+    document.getElementById("frmPhone").value = data.deliveryBoyPhoneNo;
+    document.getElementById("frmTime").value = data.deliveryTime;
+
+    //Escondiendo formulario para actualizar datos del repartidor y mostrando formulario para crear
+    if(data == false){
+        document.getElementById("frmDetails").style.display = "none"
+        document.getElementById("frmdelivery").style.display = "block"
+    }
+}
+
+async function editDeliveryDetails(e) {
+    e.preventDefault()
+    const response = await fetch(`${base_url}OrderManager/editDeliveryDetails`, {
+        method: 'POST',
+        body: new URLSearchParams(new FormData(frmDetails))
+    });
+    const data = await response.json();
+    if (data == "si") {
+        console.log(data + 'Estado editado');
+        document.getElementById("content-modal-delivery").style.display = "none"
+        document.getElementById("frmStatus").style.display = "none"
+        document.querySelector(".alert-delivery").innerHTML += `
+        <div class="alert alert-primary" role="alert">
+            Los datos fueron actualizados
+        </div>`;
+    } else {
+        //Mostrando errores por pantalla
+        console.log(data, 'malo');
+    }
+
+}
+
+
+async function createDeliveryName() {
+    //Dato el orderId esta siendo recibido desde la selectStatu()
     const response = await fetch(`${base_url}OrderManager/createDeliveryName`, {
         method: 'POST',
-        body: new FormData(frmDelivery)
+        body: new FormData(frmdelivery)
+
     });
     const data = await response.json();
     console.log(data)
@@ -406,3 +477,4 @@ async function createDeliveryName(e) {
         console.log(data, 'malo');
     }
 }
+

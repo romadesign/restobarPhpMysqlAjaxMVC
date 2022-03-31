@@ -32,51 +32,84 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <div class="alert alert-primary" role="alert">
-                    <span>0 : Pedido en Lista</span> <br>
-                    <span>1 : Pedido confirmado</span> <br>
-                    <span>2 : Preparando</span> <br>
-                    <span>3 : En camino</span> <br>
-                    <span>4 : Delivery</span> <br>
-                    <span>5 : Denegado</span> <br>
-                    <span>6 : Cancelado</span>
+            <div class="alert-delivery">
+               
+            </div>
+            <div id="content-modal-delivery" class="modal-body">
+                <div class="alert alert-primary d-flex justify-content-around" role="alert">
+                    <div>
+                        <span>0 : Pedido en Lista</span> <br>
+                        <span>1 : Pedido confirmado</span> <br>
+                        <span>2 : Preparando</span> <br>
+                        <span>3 : En camino</span> <br>
+                    </div>
+                    <div>
+                        <span>4 : Delivery</span> <br>
+                        <span>5 : Denegado</span> <br>
+                        <span>6 : Cancelado</span>
+                    </div>
                 </div>
                 <form method="POST" id="frmStatus">
                     <div class="form-group d-flex justify-content-center">
                         <div>
                             <input type="hidden" id="orderId" name="orderId">
                             <label for="formGroupExampleInput">Order Status</label>
-                            <input type="number" class="form-control w-100" id="orderStatus" name="orderStatus"  placeholder="Example input" min="0" max="6" required>
+                            <input type="number" class="form-control w-100" id="orderStatus" name="orderStatus" placeholder="Example input" min="0" max="6" required>
                         </div>
                         <div>
                             <label>Cambiar status</label>
-                            <button type="button" onclick="editStatusOrder(event)" class="btn btn-primary w-100 btn-sm">Update</button>
+                            <button type="button" onclick="editStatusOrder(event)" class="btn btn-primary w-100 btn-sm">Actualizar</button>
                         </div>
                     </div>
+                    <span class="options-status">Elija una opción mayor a "0" para poder crear el dato de tu repartidor</span>
+
                 </form>
-            </div>
-            <div class="modal-body" id="content-delivery">
-            <form method="POST" id="frmDelivery">
-                    <div class="text-left my-2">
-                    <b><label for="name">Delivery Boy Name</label></b>
-                    <input class="form-control" id="name" name="name"  type="text" required>
+                <div class="form-group ">
+                    <form method="POST" id="frmDetails">
+                        <input type="hidden" id="frmOrderId" name="frmOrderId">
+                        <input type="hidden" id="frmId" name="frmId">
+                        <div class="d-flex">
+                            <label for="formGroupExampleInput">Datos del repartidor</label>
+                        </div>
+                        <input type="text" class="form-control w-100" id="frmName" name="frmName" placeholder="Example input">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <label for="formGroupExampleInput">Celular: </label>
+                                <input type="text" class="form-control w-100" id="frmPhone" name="frmPhone" placeholder="Example input">
+                            </div>
+                            <div>
+                                <label for="formGroupExampleInput">Hora</label>
+                                <input type="number" class="form-control w-100" id="frmTime" name="frmTime" placeholder="Example input" min="0" max="120" required>
+                            </div>
+                        </div> <br>
+                        <button onclick="editDeliveryDetails(event)" id="selectDetailsId" class="btn btn-primary" type="button">Actualizar</button>
+                    </form>
                 </div>
-                <div class="text-left my-2 row">
-                    <div class="form-group col-md-6">
-                        <b><label for="phone">Phone No</label></b>
-                        <input class="form-control" id="phone" name="phone"  type="tel" required pattern="[0-9]{10}">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <b><label for="catId">Estimate Time(minute)</label></b>
-                        <input class="form-control" id="time" name="time" type="number" min="1" max="120" required>
-                    </div>
-                </div>
-                <input type="hidden" id="trackId" name="trackId">
-                <input type="hidden" id="orderIdDelivery" name="orderIdDelivery" >
-                <button onclick="createDeliveryName(event)" type="submit" class="btn btn-success" name="updateDeliveryDetails">Update</button>
-            </form>
             </div>
+            <div class="modal-body">
+                <div>
+                    <form method="POST" id="frmdelivery">
+
+                        <div class="d-flex">
+                            <label for="formGroupExampleInput">Crear datos del repartidor</label>
+                        </div>
+                        <input type="hidden" id="orderIdDelivery" name="orderIdDelivery">
+                        <input type="text" class="form-control w-100" id="name" name="name" placeholder="Example input">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <label for="formGroupExampleInput">Celular: </label>
+                                <input type="number" class="form-control w-100" id="phone" name="phone" placeholder="Example input">
+                            </div>
+                            <div>
+                                <label for="formGroupExampleInput">Hora</label>
+                                <input type="number" class="form-control w-100" id="time" name="time" placeholder="Example input" min="0" max="120" required>
+                            </div>
+                        </div> <br>
+                        <button onclick="createDeliveryName(event)" class="btn btn-primary" type="button">Crear</button>
+                    </form>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
