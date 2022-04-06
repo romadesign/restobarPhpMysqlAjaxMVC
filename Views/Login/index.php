@@ -12,7 +12,7 @@
             </div>
             <div class="alert alert-danger d-none text-center" id="alerta" role="alert">
             </div>
-            <button class="btn btn-primary btn-user btn-block w-100" type="submit" onclick="frmLogin(event)">
+            <button class="btn btn-primary btn-user btn-block w-100" type="submit" onclick="frmLoginn(event)">
                 Login
             </button>
             <button class="button-register-login btn-user btn-block w-100 mt-2" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registerUser">

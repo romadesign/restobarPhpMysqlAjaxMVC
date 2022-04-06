@@ -1,4 +1,4 @@
-function frmLogin(e) {
+function frmLoginn(e) {
     e.preventDefault();
     const username = document.getElementById("username");
     const password = document.getElementById("password");

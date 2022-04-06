@@ -16,7 +16,7 @@
                     <div class="alert alert-danger d-none text-center" id="alerta" role="alert">
                     </div>
                     <div class="d-flex">
-                    <button class="btn btn-primary btn-user btn-block w-100" type="submit" onclick="frmLogin(event)">
+                    <button class="btn btn-primary btn-user btn-block w-100" type="submit" onclick="frmLoginn(event)">
                         Login
                     </button>
                     <button type="button" class="btn btn-secondary w-100" data-bs-dismiss="modal">Close</button>
