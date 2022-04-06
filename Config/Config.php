@@ -1,5 +1,5 @@
 <?php
-    const base_url_user = "http://localhost/proyect/restobarPhpMysqlAjaxMVC/";
+    const base_url_user = "http://localhost/proyects/restobarPhpMysqlAjaxMVC/";
     //const base_url = "http://localhost/romacode/restobarPhpMysqlAjaxMVC/admin/";
     //const base_url_user = "http://localhost/proyectroma/restobarPhpMysqlAjaxMVC/";
 const host = "localhost";
